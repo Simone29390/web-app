@@ -1,0 +1,38 @@
+<mat-card class="example-card">
+  <mat-chip-list style="float: right">
+    <mat-chip>
+      <mat-icon>phone</mat-icon>
+      34----------
+    </mat-chip>
+    <mat-chip color="accent" selected="true">
+      <mat-icon>attach_money</mat-icon>
+      {{ insertion.price }}
+    </mat-chip>
+  </mat-chip-list>
+  <mat-card-header>
+    <img mat-card-avatar [src]="userProfileImage">
+    <mat-card-title>{{ userName }}</mat-card-title>
+    <mat-card-subtitle>{{ insertion.datetime  | amCalendar}}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-title>{{ insertion.title }}</mat-card-title>
+  <div style="text-align: center">
+  <img mat-card-image [src]="insertion.image_url" alt="Photo of a Shiba Inu">
+  </div>
+  <mat-card-content>
+    <p>
+      {{ insertion.description }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <mat-card-footer>
+    <mat-chip-list class="mat-chip-list-stacked" style="float: left">
+      <mat-chip selected="true" color="primary">
+        {{ getCategoryName(insertion.category) }}
+      </mat-chip>
+
+    </mat-chip-list>
+    </mat-card-footer>
+
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,59 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Title" [(ngModel)] = "title" name = "title">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Description" [(ngModel)] = "description" name = "description"></textarea>
+  </mat-form-field>
+</form>
+
+<mat-form-field class="example-full-width">
+  <mat-select placeholder="Select a category" (change)="changeShape($event)">
+    <mat-option *ngFor="let category of categories" [value]="category.value">
+      {{ category.viewValue }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field class="example-full-width">
+  <input matInput placeholder="Price" type="number" class="example-right-align" [(ngModel)] = "price">
+  <span matPrefix>$&nbsp;</span>
+  <span matSuffix>.00</span>
+</mat-form-field>
+
+<button mat-icon-button color="primary" class="mat-elevation-z1" (click)="imgFileInput.click()">
+  <mat-icon >
+    <i class="material-icons">photo_camera</i>
+  </mat-icon></button>
+<input hidden type="file" #imgFileInput (change)="selectFile($event)"/>
+
+<button mat-icon-button color="primary" (click)="pushMe()" class="submit mat-elevation-z1">
+  <mat-icon>
+    <i class="material-icons">send</i>
+  </mat-icon>
+</button>
+
+<div *ngIf="fileUploaded.data.length > 0" class="photo-upload">
+
+  <mat-grid-list style="padding:10px" [cols]="(fileUploaded.data.length > 3) ? 3 : fileUploaded.data.length" rowHeight="1:1" dnd-sortable-container [sortableData]="fileUploaded.data">
+    <mat-grid-tile *ngFor="let data of fileUploaded.data; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">
+
+      <div *ngIf="data.complete" >
+
+        <img mat-card-image [src]="data.url" />
+        <button mat-icon-button class="mat-elevation-z2" style="margin: 1%;position: absolute;top:0;left:0;">
+          <mat-icon (click)="deleteUploaded(data)">
+            <i class="material-icons">clear</i>
+          </mat-icon>
+        </button>
+      </div>
+
+      <div *ngIf="!data.complete">
+        <mat-progress-spinner diameter="60" strokeWidth="5" color="warn" mode="indeterminate"></mat-progress-spinner>
+      </div>
+
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</div>

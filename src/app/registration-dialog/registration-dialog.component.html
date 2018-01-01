@@ -1,0 +1,27 @@
+<div id="LoginDialog" class="mat-dialog-login">
+  <form [formGroup]="FormGroup">
+    <div class="input-login">
+      <mat-form-field class="input-left">
+        <input matInput placeholder="Email" formControlName="email" required>
+        <mat-error>
+          <strong>Required</strong> a valid email address
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input-right">
+        <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+        <mat-icon matSuffix class="material-icons" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <mat-error>
+          Enter a password of at least <strong>six</strong> characters
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="submit-login">
+      <button mat-raised-button color="primary" (click)="logIn()">
+        <small>Log In</small>
+      </button>
+    </div>
+  </form>
+
+</div>

@@ -1,0 +1,112 @@
+<div class="registration-cards">
+  <mat-card class="registration-description-card">
+    <mat-card-title-group>Uninsubria</mat-card-title-group>
+    <mat-card-subtitle>Course: Web-Application </mat-card-subtitle>
+    <mat-card-subtitle>Project name: Showcase </mat-card-subtitle>
+    <mat-card-subtitle>Compiler: Simone Magetta </mat-card-subtitle>
+    <mat-card-subtitle>Date: 30/12/2017 </mat-card-subtitle>
+
+  </mat-card>
+
+  <mat-card class="registration-stepper-card">
+    <mat-horizontal-stepper class="registration-stepper" [linear]="isLinear" (selectionChange)="register($event)">
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Fill out general information</ng-template>
+
+          <div class="form-2-col-g-xs">
+            <mat-form-field class="form-input-lt">
+              <input matInput placeholder="First name" formControlName="name" required>
+              <mat-error>
+                First name <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-input-rt">
+              <input matInput placeholder="Last name" formControlName="lastname" required>
+              <mat-error>
+                Last name <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-2-col-g-xs">
+            <mat-form-field class="form-input-lt">
+              <input matInput autocomplete="email" placeholder="Email" formControlName="email" required>
+              <mat-error>
+                <strong>Required</strong> a valid email address
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-input-rt">
+              <input matInput autocomplete="current-password" placeholder="Enter your password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+              <mat-icon matSuffix class="material-icons" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+              <mat-error>
+                Enter a password of at least <strong>six</strong> characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field class="full-width">
+            <span matPrefix>+&nbsp;</span>
+            <input type="tel" matInput formControlName="telephone" placeholder="Telephone">
+            <mat-icon matSuffix class="material-icons">mode_edit</mat-icon>
+            <mat-hint align="start">
+              <strong>Enter your number to be contactable</strong>
+            </mat-hint>
+          </mat-form-field>
+
+          <div>
+            <button class="btn-right" mat-raised-button matStepperNext color="primary">Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Fill out additional information</ng-template>
+
+          <div class="user-info">
+            <div class="image-content">
+              <img class="profile-image" id="profilePhoto" [src]="imagePath || '/assets/other/default-profile.png'" alt="Profile image">
+
+              <button class="profile-image-upload" mat-mini-fab color="primary" (click)="uploadPhoto.click()">
+                <mat-icon>file_upload</mat-icon>
+              </button>
+
+              <input #uploadPhoto name="profilePhoto" type="file" accept="image/*" (change)="setSrcUrl( $event )" hidden>
+            </div>
+
+            <mat-card class="user-addons">
+              <h5>Enter your gender</h5>
+              <mat-radio-group class="radio-group-gender" formControlName="gender" required>
+                <mat-radio-button aria-label="Male gender" value="male" [checked]="'true'" >Male</mat-radio-button>
+                <mat-radio-button aria-label="Female gender" value="female">Female</mat-radio-button>
+              </mat-radio-group>
+
+              <h5 class="no-margin-bottom">Enter your date of birth</h5>
+              <mat-form-field class="user-date">
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </mat-card>
+          </div>
+
+          <div>
+            <button mat-raised-button matStepperPrevious color="primary">Back</button>
+            <button class="btn-right" mat-raised-button matStepperNext color="primary">Finish</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step #registrationStep>
+        <ng-template matStepLabel>Done</ng-template>
+        You are now done.
+        <div>
+          <button mat-raised-button matStepperPrevious color="primary">Back</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-card>
+</div>

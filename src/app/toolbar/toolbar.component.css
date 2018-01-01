@@ -1,0 +1,17 @@
+.toolbar {
+  position: fixed;
+  z-index: 10;
+}
+
+.icon {
+  padding: 0 14px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user-photo {
+  background-size: cover;
+  border-radius: 15px;
+}

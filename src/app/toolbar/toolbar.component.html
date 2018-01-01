@@ -1,0 +1,18 @@
+<mat-toolbar color="primary" class="toolbar mat-elevation-z3">
+  <span>Project Showcase</span>
+  <span class="spacer"></span>
+
+  <span *ngIf="!logged">
+    <button mat-raised-button color="primary" (click)="openDialog()">
+      <mat-icon aria-label="Log In">account_circle</mat-icon>
+      <small>Log In</small>
+    </button>
+  </span>
+
+  <span *ngIf="logged">
+    <button mat-raised-button color="primary" (click)="logOut()">
+      <mat-icon aria-label="Log Out" class="user-photo" [style.backgroundImage]="'url(' + getUserPhoto() + ')'"></mat-icon>
+      <small>Log Out</small>
+    </button>
+  </span>
+</mat-toolbar>

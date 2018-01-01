@@ -1,0 +1,185 @@
+[readonly] {
+  color: #aaa;
+}
+
+[hidden] {
+  display: none!important;
+}
+
+/* Registration form */
+.registration-cards {
+  display: -ms-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+
+/* Registration description */
+.registration-description-card {
+  margin: 20px 20px 20px 50px;
+  width: 30%;
+}
+
+.registration-stepper-card .login {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  position: absolute;
+  background-color: rgba(255,255,255,.85);
+  z-index: 1;
+  top: 0;
+  left: 0;
+}
+
+.registration-stepper-card .login mat-spinner {
+  width: 100px;
+  height: 100px;
+
+  left: 50%;
+  top: 50%;
+
+  margin-top: -50px;
+  margin-left: -50px;
+}
+
+.image-content {
+  position: relative;
+}
+
+.image-content .profile-image {
+  width: 250px;
+  height: 250px;
+
+  border-radius: 2px;
+}
+.image-content .profile-image-upload {
+  position: absolute;
+  bottom: -15px;
+  left: 230px;
+  z-index: 1;
+}
+
+/* information */
+.description-list .registration-block {
+  display: table;
+}
+
+.description-list .registration-text {
+  padding: 10px;
+  display: table-cell;
+}
+
+.description-list .registration-ico {
+  display: table-cell;
+  padding: 0 20px 20px 0;
+  vertical-align: middle;
+}
+
+.description-list .registration-ico mat-icon {
+  font-size: 32px;
+}
+
+/* Registration stepper */
+.registration-stepper-card {
+  margin: 20px 50px 20px 20px;
+  width: 70%;
+}
+
+.form-2-col-g-xs {
+  display: flex;
+  width: 100%;
+}
+
+.form-input-lt {
+  margin-right: 10px;
+}
+
+.form-input-rt {
+  margin-left: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .form-2-col-g-xs {
+    display: inline-block;
+  }
+
+  .form-input-lt, .form-input-rt {
+    margin: 0;
+  }
+
+  .registration-cards {
+    display: block;
+  }
+
+  /* Registration description */
+  .registration-description-card {
+    margin: 20px;
+    width: auto;
+  }
+
+  /* Registration stepper */
+  .registration-stepper-card {
+    margin: 20px;
+    width: auto;
+  }
+}
+
+.form-2-col-g-xs mat-form-field {
+  width: 100%;
+}
+
+/* User Information - Second step */
+.user-info {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.user-info .user-addons {
+  margin-left: 35px;
+  width: 100%;
+}
+
+.user-info .user-addons h5.no-margin-bottom {
+  margin-bottom: 0;
+}
+
+.user-info .user-addons .radio-group-gender {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.user-info .user-addons .radio-group-gender mat-radio-button{
+  margin: 5px 0;
+}
+
+.user-info .user-addons .user-date {
+  width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  .user-info {
+    display: block;
+  }
+
+  .user-info .user-addons {
+    margin-left: unset;
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1281px) {
+  .registration-description-card {
+    margin: 20px 10px 20px 20px;
+    width: 40%;
+  }
+
+  .registration-stepper-card {
+    margin: 20px 10px 20px 20px;
+    width: 60%;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+.btn-right {
+  float: right;
+}
