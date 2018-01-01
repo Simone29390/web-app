@@ -9,8 +9,8 @@
 
 .mat-card-image {
   margin: 10px;
-  max-height: 400px;
-  max-width: 400px;
+  max-height: 50%;
+  max-width: 55%;
 }
 .mat-card-footer {margin-left: 10px; margin-bottom: 35px;}
 
@@ -20,4 +20,12 @@ mat-chip {
 
 mat-card {
   margin-bottom: 5%;
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1281px) {
+  .mat-card-image {
+    margin: 10px;
+    max-height: 70%;
+    max-width: 80%;
+  }
 }

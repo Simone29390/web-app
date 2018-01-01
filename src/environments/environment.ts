@@ -12,6 +12,7 @@ export const environment = {
     projectId: "applicazioni-web-63d92",
     storageBucket: "applicazioni-web-63d92.appspot.com",
     messagingSenderId: "1098101396959"
-  }
+  },
+  envName: 'prod'
 };
 

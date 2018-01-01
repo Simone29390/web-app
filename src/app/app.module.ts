@@ -48,7 +48,7 @@ import {firebase} from "../environments/firebase";
     RoutingModule,
     BrowserModule, MaterialDependenciesModule, BrowserAnimationsModule, HttpModule,
     AngularFireModule.initializeApp(firebase.firebase),
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     MomentModule,
     DndModule.forRoot()
   ],
@@ -59,4 +59,3 @@ import {firebase} from "../environments/firebase";
 
 export class AppModule { }
 
-platformBrowserDynamic().bootstrapModule( AppModule );
