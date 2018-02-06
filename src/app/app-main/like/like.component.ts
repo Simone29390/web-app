@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Firestore} from "../../firestore-cfg/firestore";
 import * as firebase from "firebase";
-import Query = firebase.database.Query;
+import Query = database.Query;
 import {FirebaseQM} from "../../firestore-cfg/firebaseQueryManager";
+import {database} from "firebase";
 
 @Component({
   selector: 'app-like',

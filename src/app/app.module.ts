@@ -49,6 +49,7 @@ import { ShowcaseActiveComponent } from './app-main/showcase-active/showcase-act
 import { ShowcaseExpiredComponent } from './app-main/showcase-expired/showcase-expired.component';
 import { ShowcaseWonComponent } from './app-main/showcase-won/showcase-won.component';
 import { HistoryDonationsComponent } from './app-main/history-donations/history-donations.component';
+import {HistoryDonationService} from "./app-main/history-donations/history-donation.service";
 
 
 @NgModule({
@@ -98,7 +99,9 @@ import { HistoryDonationsComponent } from './app-main/history-donations/history-
     SidenavService,
     CategoryPanelService,
     ShowcaseService,
-    MainViewService
+    MainViewService,
+    HistoryDonationService
+
   ],
   bootstrap: [ ToolbarComponent, RouteComponent  ]
 })

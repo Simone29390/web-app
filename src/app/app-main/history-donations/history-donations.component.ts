@@ -1,34 +1,52 @@
-import { Component, OnInit } from '@angular/core';
-import {DataSource} from "@angular/cdk/typings/collections";
 import {Observable} from "rxjs/Observable";
+import {DataSource} from '@angular/cdk/collections';
+
+export interface Data {
+  datetime: string;
+  name: string;
+  key: string;
+}
+
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import * as firebase from "firebase";
-import Query = firebase.database.Query;
+import Query = database.Query;
 import {FirebaseQM} from "../../firestore-cfg/firebaseQueryManager";
 import {Firestore} from "../../firestore-cfg/firestore";
-import {MatTableDataSource} from "@angular/material";
+import {database} from "firebase";
+import {HistoryDonationService} from "./history-donation.service";
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {startWith} from "rxjs/operators";
 
 @Component({
   selector: 'app-history-donations',
   templateUrl: './history-donations.component.html',
   styleUrls: ['./history-donations.component.css']
 })
-export class HistoryDonationsComponent implements OnInit {
+export class HistoryDonationsComponent implements OnInit, AfterViewInit {
   private fs: Firestore;
-  private filter: object;
   private qm: FirebaseQM;
-  donations = [];
+  donations;
   public completed: boolean;
   private fb: firebase.app.App;
   private user;
-  displayedColumns = ['datetime', 'value', 'key'];
-  dataSource;
+  displayedColumns = ['datetime', 'name', 'key'];
+  dataSource = new MatTableDataSource();
+  myData: Array < any > ;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  resultsLength = 0;
 
-  constructor(  ) {
+  constructor( public historyDonationService: HistoryDonationService ) {
     this.fs = new Firestore();
     this.fb = this.fs.getConfiguredFirebase();
     this.qm = new FirebaseQM();
 
     this.completed = false;
+
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   ngOnInit() {
@@ -36,48 +54,29 @@ export class HistoryDonationsComponent implements OnInit {
 
     this.fb.auth().onAuthStateChanged( function( user ) {
       self.user = user;
-      self.combineInsetions();
-    });
-  }
+      self.historyDonationService.getDonations(self.user)
+        .then( function( res ) {
 
+          self.myData = res['docRef'];
+          self.dataSource.data = self.myData;
 
-  public combineInsetions() {
+          self.resultsLength = self.myData.length;
+          self.dataSource.paginator = self.paginator;
 
-    const self = this;
-
-    // Init view
-    self.donations = [];
-    this.completed = false;
-
-    const ref = this.qm.getReference( 'Donation' );
-    const groupRef = this.qm.getReference( 'Insertion' );
-
-    let query: Query = ref
-      .orderByChild( 'userkey')
-      .equalTo( self.user['uid']);
-
-    query.once('value').then(function (querySnapshot) {
-
-      const obj: any = [];
-
-      querySnapshot.forEach(function (snapshot) {
-
-        self.donations.push({
-          datetime           : snapshot.child('datetime').val(),
-          value              : snapshot.child('value').val(),
-          key                : snapshot.child('key').val(),
-        });
-        console.log(self.donations)
+          self.completed = true;
       });
 
-      self.dataSource = new MatTableDataSource(self.donations);
-
-      self.completed = true;
     });
-
   }
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
 
 
 }
+
 
 
