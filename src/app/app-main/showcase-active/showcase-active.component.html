@@ -1,0 +1,23 @@
+
+<mat-card>
+<span>
+    <form class="cube-form">
+      <input #search type="search" placeholder="Search">
+    </form>
+  </span>
+</mat-card>
+
+<mat-grid-list cols="4"  rowHeight="350px" *ngIf="completed">
+
+  <mat-grid-tile *ngFor="let insertion of (insertions | searchFilter: search.value )">
+
+    <app-item [insertion]="insertion"></app-item>
+  </mat-grid-tile>
+
+
+</mat-grid-list>
+
+
+<div class="spinner-container" *ngIf="!completed">
+  <mat-spinner class="loader"></mat-spinner>
+</div>

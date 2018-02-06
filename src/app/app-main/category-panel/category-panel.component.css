@@ -1,0 +1,40 @@
+.h2 {
+  margin: 10px;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+}
+
+.categories-checked {
+  display: flex;
+  align-items: center;
+}
+
+.section1 {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.margin {
+  margin: 0 10px;
+}
+
+mat-card {
+  color: rgba(0, 0, 0, 0.54);
+  margin: 3px;
+  font-size: small;
+}
+
+
+.side-menu {
+  height: 100%;
+}
+
+.mat-sidenav-container {
+  width: 100%;
+  padding: 0;
+}

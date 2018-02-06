@@ -1,0 +1,40 @@
+<mat-sidenav-container class="side-menu">
+  <mat-sidenav  #sidenav mode="side" [(opened)]="opened">
+
+
+
+<mat-card>
+
+  <h2>
+    <i class="material-icons mat-dark">filter_list</i>
+
+    Cerca categoria
+  </h2>
+
+
+  <section class="section" *ngFor="let i of sequence">
+    <mat-checkbox
+      class="margin"
+      [(ngModel)]="checked[i]"
+      [(indeterminate)]="indeterminate"
+      [align]="align"
+      [disabled]="disabled">
+      {{ getCategoryName(i) }}
+    </mat-checkbox>
+  </section>
+
+
+
+
+  <section class="section1">
+    <mat-checkbox class="margin" [(ngModel)]="disabled">Disable Filter</mat-checkbox>
+  </section>
+
+  <button mat-raised-button="" color="primary" (click)="setFilter()" >
+    Set filter
+    <i class="material-icons">done</i>
+  </button>
+
+</mat-card>
+  </mat-sidenav>
+</mat-sidenav-container>

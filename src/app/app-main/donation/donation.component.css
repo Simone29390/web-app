@@ -1,0 +1,57 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  font-size: x-large;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.example-full-width {
+  min-width: 1%;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.submit { float: right}
+
+mat-card-title {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.rule {
+  color: rgba(0, 0, 0, 0.54);
+  background-color: #FAFAFA;
+  width: 100%;
+  max-height: 200px;
+  border: 1px solid #eee;
+  border-bottom: transparent;
+  padding: 20px;
+  display: table;
+}
+
+mat-card-actions {
+  text-align: center;
+  width: 100%;
+}
+
+mat-form-field {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.donation {
+  width: 90%;
+}
+
+mat-checkbox {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+mat-card-actions {
+  color: rgba(0, 0, 0, 0.54);
+}

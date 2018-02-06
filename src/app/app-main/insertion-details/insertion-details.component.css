@@ -1,0 +1,95 @@
+.insertions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+
+mat-card {
+  width: 90%;
+  position: relative;
+  display: -ms-flex;
+  display: -webkit-flex;
+  display: flex;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.mat-card-image{
+  padding: 30px;
+  width: 80%;
+}
+
+.higher-bidder {
+  background-color: aquamarine;
+}
+
+agm-map {
+  height: 150px;
+}
+.favorite { float: right }
+
+.image-content {
+  width: 50%;
+  text-align: center;
+  position: relative;
+  display: -ms-flex;
+  display: -webkit-flex;
+  display: flex;
+
+}
+
+.image-primary {
+  width: 80%;
+}
+
+.image-gallery {
+  background-color: #FAFAFA;
+}
+
+.thumb {
+  margin-top: 10px;
+  width: 50px;
+  height: 50px;
+}
+
+.thumb :hover, .image-gallery .img :hover {
+  cursor: pointer;
+}
+
+.detail-content {
+  width: 50%;
+
+}
+
+.mat-card-image {
+  margin: 10px;
+  object-fit: cover;
+  width:400px;
+  height:400px;
+  padding: 3px;
+
+}
+
+mat-card-actions {text-align: center}
+
+.container {
+  position: relative;
+  display: -ms-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+
+
+.section {border: 1px solid #eee;
+  border-bottom: transparent;
+  padding: 4px;
+  font-size: 50px;
+  display: table;
+  cursor: pointer;
+}
+
+.loader {
+  text-align: center;
+  width: 100%!important;
+  margin: 10px;
+}

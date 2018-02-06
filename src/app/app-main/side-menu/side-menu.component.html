@@ -1,0 +1,52 @@
+<mat-sidenav-container class="side-menu">
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+    <img src="/assets/wp/app_ace_image.png" class="logo">
+    <mat-card class="profile">
+      <mat-card-header>
+        <img mat-card-avatar src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png">
+        <mat-card-title>Simone Magetta</mat-card-title>
+        <mat-card-subtitle>User</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions>
+
+          <button mat-raised-button="">
+          Modifica Profilo
+            <mat-icon><i class="material-icons mat-dark">mode_edit</i></mat-icon>
+          </button>
+
+      </mat-card-actions>
+    </mat-card>
+
+  </mat-sidenav>
+
+
+
+
+  <mat-sidenav-content>
+
+
+
+    <a [routerLink]="['/']">
+    <mat-icon class="side-button " color="primary" matTooltip="See your home"
+              matTooltipPosition="right">
+      home
+    </mat-icon>
+    </a>
+
+    <a [routerLink]="['/favorite']">
+    <mat-icon class="side-button" color="primary" matTooltip="See your favorites"
+              matTooltipPosition="right">
+      favorite
+    </mat-icon>
+    </a>
+
+    <a [routerLink]="['/donation']">
+    <mat-icon class="side-button" color="primary" matTooltip="See you donations"
+              matTooltipPosition="right">
+      shopping_basket
+    </mat-icon>
+    </a>
+</mat-sidenav-content>
+
+
+</mat-sidenav-container>

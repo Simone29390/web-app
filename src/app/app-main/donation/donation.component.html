@@ -1,0 +1,32 @@
+<div class="donation">
+
+<mat-card-title>
+<h3>Inserisci la tua offerta</h3>
+</mat-card-title>
+
+<mat-card-content>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Price"  required type="number" class="example-right-align" [(ngModel)] = "price" (ngModelChange)="changeText($event)">
+    <span matPrefix>€&nbsp;</span>
+    <span matSuffix>.00</span>
+
+  </mat-form-field>
+  <mat-icon *ngIf="tooLow" class="red"><i class="material-inpcons">clear</i></mat-icon>
+  <mat-icon *ngIf="!tooLow" class="green"><i class="material-icons">done</i></mat-icon>
+
+</mat-card-content>
+
+<div class="rule">
+  <h5>{{ rule }}</h5>
+</div>
+
+  <mat-card-actions>
+    <mat-checkbox [(ngModel)]="checked">Accetto le condizioni.
+    </mat-checkbox>
+  </mat-card-actions>
+
+  <mat-card-actions>
+<button mat-raised-button="" color="warn" (click)="close()">Annulla</button>
+    <button mat-raised-button="" color="warn" (click)="pushDonation()">Conferma</button>
+  </mat-card-actions>
+</div>
