@@ -27,10 +27,28 @@ import {LoginActivate} from "./login.activate";
 import {RoutingModule} from "./app.route/app.route.module";
 import {RouteComponent} from "./app.route/route/route.component";
 import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
-import { ShowcaseComponent } from './app-main/showcase/showcase.component';
+import {SearchFilter, ShowcaseComponent} from './app-main/showcase/showcase.component';
 import { ItemComponent } from './app-main/item/item.component';
 import { InputComponent } from './app-main/input/input.component';
 import {firebase} from "../environments/firebase";
+import { SideMenuComponent } from './app-main/side-menu/side-menu.component';
+import {SidenavService} from "./app-main/side-menu/sidenave-service";
+import { InsertionDetailsComponent } from './app-main/insertion-details/insertion-details.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { AgmCoreModule } from '@agm/core';
+import { CategoryPanelComponent } from './app-main/category-panel/category-panel.component';
+import {CategoryPanelService} from "./app-main/category-panel/category-panel-service";
+import {ShowcaseService} from "./app-main/showcase/showcase-service";
+import { LikeComponent } from './app-main/like/like.component';
+import {MainViewService} from "./app-main/main-view/main-view-service";
+import { ShowcaseFavoriteComponent } from './app-main/showcase-favorite/showcase-favorite.component';
+import { FavoriteViewComponent } from './app-main/favorite-view/favorite-view.component';
+import { DonationViewComponent } from './app-main/donation-view/donation-view.component';
+import { DonationComponent } from './app-main/donation/donation.component';
+import { ShowcaseActiveComponent } from './app-main/showcase-active/showcase-active.component';
+import { ShowcaseExpiredComponent } from './app-main/showcase-expired/showcase-expired.component';
+import { ShowcaseWonComponent } from './app-main/showcase-won/showcase-won.component';
+import { HistoryDonationsComponent } from './app-main/history-donations/history-donations.component';
 
 
 @NgModule({
@@ -42,7 +60,21 @@ import {firebase} from "../environments/firebase";
     MainViewComponent,
     ShowcaseComponent,
     ItemComponent,
-    InputComponent
+    InputComponent,
+    SideMenuComponent,
+    InsertionDetailsComponent,
+    NotFoundComponent,
+    SearchFilter,
+    CategoryPanelComponent,
+    LikeComponent,
+    ShowcaseFavoriteComponent,
+    FavoriteViewComponent,
+    DonationViewComponent,
+    DonationComponent,
+    ShowcaseActiveComponent,
+    ShowcaseExpiredComponent,
+    ShowcaseWonComponent,
+    HistoryDonationsComponent
   ],
   imports: [
     RoutingModule,
@@ -50,10 +82,24 @@ import {firebase} from "../environments/firebase";
     AngularFireModule.initializeApp(firebase.firebase),
     AngularFirestoreModule.enablePersistence(),
     MomentModule,
-    DndModule.forRoot()
+    DndModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCt__SEyx4mW-r0n8neNFVj0lQN0LWBCdc'
+    })
   ],
-  entryComponents: [ RegistrationDialogComponent, ],
-  providers: [ AngularFireDatabaseProvider, EventEmitterService, LoginActivate, UploadFileService, FileUploadService, MessagesHandlerService ],
+  entryComponents: [ RegistrationDialogComponent, DonationComponent],
+  providers: [
+    AngularFireDatabaseProvider,
+    EventEmitterService,
+    LoginActivate,
+    UploadFileService,
+    FileUploadService,
+    MessagesHandlerService,
+    SidenavService,
+    CategoryPanelService,
+    ShowcaseService,
+    MainViewService
+  ],
   bootstrap: [ ToolbarComponent, RouteComponent  ]
 })
 

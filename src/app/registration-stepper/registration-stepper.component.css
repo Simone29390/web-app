@@ -17,6 +17,39 @@
 .registration-description-card {
   margin: 20px 20px 20px 50px;
   width: 30%;
+text-align: center;
+
+}
+
+.btn-login-google {
+  width: 35%;
+  height: 75px;
+  font-size: xx-large;
+}
+
+.google-logo {
+  width: 100px;
+  height: 35px;
+
+}
+
+.register-req {
+  margin-top: 2%;
+  height: 35px;
+  font-size: x-large;
+}
+
+.btn-login-email {
+  margin-top: 2%;
+  width: 35%;
+  height: 75px;
+  font-size: x-large;
+}
+
+.registration-stepper-card .mat-icon {
+  font-size: 35px;
+  width: 35px;
+  height: 35px;
 }
 
 .registration-stepper-card .login {
@@ -82,6 +115,7 @@
 .registration-stepper-card {
   margin: 20px 50px 20px 20px;
   width: 70%;
+  text-align: center;
 }
 
 .form-2-col-g-xs {

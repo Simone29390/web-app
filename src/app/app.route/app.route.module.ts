@@ -5,6 +5,10 @@ import { RegistrationStepperComponent } from "../registration-stepper/registrati
 import { LoginActivate } from "../login.activate";
 import { MainViewComponent } from "../app-main/main-view/main-view.component";
 import { RouteComponent } from './route/route.component';
+import {InsertionDetailsComponent} from "../app-main/insertion-details/insertion-details.component";
+import {NotFoundComponent} from "../not-found/not-found.component";
+import {FavoriteViewComponent} from "../app-main/favorite-view/favorite-view.component";
+import {DonationViewComponent} from "../app-main/donation-view/donation-view.component";
 
 const routes: Routes = [
   {
@@ -16,6 +20,21 @@ const routes: Routes = [
     path: 'login',
     component: RegistrationStepperComponent,
     canActivate: [LoginActivate]
+  },
+  {
+    path: 'dashboard/:id',
+    component: InsertionDetailsComponent,
+  },
+  {
+    path: 'favorite',
+    component: FavoriteViewComponent,
+  },
+  {
+    path: 'donation',
+    component: DonationViewComponent,
+  },
+  {
+    path: '**', component: NotFoundComponent
   }
 ];
 

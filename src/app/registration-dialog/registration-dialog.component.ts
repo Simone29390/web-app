@@ -67,6 +67,12 @@ export class RegistrationDialogComponent implements OnInit {
       });
   }
 
+  googleLogin(): void {
+    this.fs.googleLogin();
+
+    this.dialogRef.close();
+  }
+
   private logged(): void {
     this.eventEmitter.emitEventEmitter({
       logged: true

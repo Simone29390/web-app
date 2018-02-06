@@ -69,6 +69,8 @@ class FirestoreUsers {
     let user: firebase.User = this.getLoggedUser();
 
     if (userParams.photoURL) {
+      self.updateProfile(user, userParams)
+
       this.uploadProfilePhoto(userParams.photoURL)
         .then(function (success) {
           userParams.photoURL = success;

@@ -1,16 +1,22 @@
-<mat-toolbar color="primary" class="toolbar mat-elevation-z3">
-  <span>Project Showcase</span>
+<mat-toolbar color="warn" class="toolbar mat-elevation-z3">
+
+  <button *ngIf="logged" class="cube-menu" (click)="toggleSidenav()" mat-fab>
+    <mat-icon>menu</mat-icon>
+  </button>
+
+
+  <span>Centro del Riuso di Malnate (VA)</span>
   <span class="spacer"></span>
 
-  <span *ngIf="!logged">
-    <button mat-raised-button color="primary" (click)="openDialog()">
+  <span *ngIf="false">
+    <button mat-raised-button color="warn" (click)="openDialog()">
       <mat-icon aria-label="Log In">account_circle</mat-icon>
       <small>Log In</small>
     </button>
   </span>
 
   <span *ngIf="logged">
-    <button mat-raised-button color="primary" (click)="logOut()">
+    <button mat-raised-button color="warn" (click)="logOut()">
       <mat-icon aria-label="Log Out" class="user-photo" [style.backgroundImage]="'url(' + getUserPhoto() + ')'"></mat-icon>
       <small>Log Out</small>
     </button>

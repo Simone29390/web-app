@@ -10,6 +10,8 @@ import { User } from "../firestore-cfg/user";
 import {Utils} from "../utility/utils";
 import * as firebase from "firebase";
 import {FirestoreUsers} from "../firestore-cfg/firestore.users";
+import {SidenavService} from "../app-main/side-menu/sidenave-service";
+import {CategoryPanelService} from "../app-main/category-panel/category-panel-service";
 
 @Component({
   selector: 'app-toolbar',
@@ -33,7 +35,7 @@ export class ToolbarComponent implements OnInit  {
   // Current logged user
   private u: User;
 
-  constructor( public dialog: MatDialog ) {
+  constructor( public dialog: MatDialog, private sidenav: SidenavService , private sidenav1: CategoryPanelService) {
     // Initialize a Firestore and FirestoreQueryManager objects
     this.fs = new Firestore();
     this.fb = this.fs.getConfiguredFirebase();
@@ -56,6 +58,10 @@ export class ToolbarComponent implements OnInit  {
         // Refresh view
         Utils.refreshView();
     });
+  }
+  public toggleSidenav(): void {
+    this.sidenav.toggle();
+    this.sidenav1.toggle();
   }
 
   /**

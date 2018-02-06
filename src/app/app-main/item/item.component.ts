@@ -10,60 +10,37 @@ import Query = firebase.firestore.Query;
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent implements OnInit {
-  @Input() insertion: FirestoreInsertion;
-  public userProfileImage: string;
-  public userFirstName: string;
-  public userLastName: string;
-  public userName: string;
-  public userPhone: string;
-  private qm: FirestoreQM;
+  @Input() insertion: object;
+  insertionId: string;
 
   constructor() {
-    this.qm = new FirestoreQM();
   }
 
   ngOnInit() {
-    let self = this;
-
-    let query: Query = this.qm.getRefQuery( 'users', new Array({
-      filter: 'uid',
-      comparison: '==',
-      value: self.insertion.uid
-    }) );
-
-    query.get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          self.userProfileImage = doc.data()['photoURL'];
-          self.userFirstName = doc.data()['firstName'];
-          self.userLastName = doc.data()['lastName'];
-          self.userName = self.userFirstName + ' ' + self.userLastName;
-          self.userPhone = doc.data()['phoneNumber'];
-        });
-      });
+    this.insertionId = this.insertion['key'];
   }
 
   getCategoryName(id: string) {
     switch (id) {
       case '0':
-        return 'Computers & Mobile Phone';
+        return 'Abbigliamento e accessori';
       case '1':
-        return 'Clothing';
+        return 'Elettrodomestici';
       case '2':
-        return 'Sports equipment';
+        return 'Film e Libri';
       case '3':
-        return 'Kitchen utensils';
+        return 'Infanzia e Bambini';
       case '4':
-        return 'House & Garden';
+        return 'Mobili';
       case '5':
-        return 'Animals & Accessories';
+        return 'Oggetti da Cucina';
       case '6':
-        return 'Comics and Newspapers';
+        return 'Oggetti di Arredamento';
       case '7':
-        return 'Collectibles';
+        return 'Oggetti Sportivi';
       case '8':
-        return 'Other Categories';
+        return 'Altre Categorie';
     }
-    return 'Other Categories';
+    return 'Altre Categorie';
   }
 }

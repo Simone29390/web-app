@@ -8,8 +8,9 @@ html, body {
   min-height: 100%;
   height: 100%;
 
-  background: url( '/assets/wp/numix___glimpse_of_the_future___print_by_me4oslav-d6escoi.png' );
-  background-size: cover;
+
+
+  background-color: #FAFAFA;
 
   overflow-x: hidden;
 }
@@ -19,6 +20,12 @@ main {
 }
 
 
+
+.material-icons.mat-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.mat-dark.mat-inactive { color: rgba(0, 0, 0, 0.26); }
+
+.material-icons.mat-light { color: rgba(255, 255, 255, 1); }
+.material-icons.mat-light.mat-inactive { color: rgba(255, 255, 255, 0.3); }
 
 
 

@@ -7,6 +7,8 @@ import {FileUploadService} from "../services/file-upload/file-upload.service";
 import {MessagesHandlerService} from "../services/error-handler/messages-handler.service";
 import {StringUtils} from "../utility/string.utils";
 import {FirestoreUsers} from "../firestore-cfg/firestore.users";
+import {MatDialog} from "@angular/material";
+import {RegistrationDialogComponent} from "../registration-dialog/registration-dialog.component";
 
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PWD_MIN_LENGTH = 6;
@@ -23,6 +25,8 @@ export class RegistrationStepperComponent implements OnInit {
   //
   private MESSAGE: string = 'Ooops!! Unable to upload the photo with that format';
 
+  private MESSAGE_EMAIL_ALREADY_USED: string = 'Ooops!! Email is already used by another account!';
+
   private REGISTER: number = 2;
 
   // Indicates that stepper is in linear mode
@@ -38,6 +42,8 @@ export class RegistrationStepperComponent implements OnInit {
   // Declare property of password input type
   public hide: boolean = true;
 
+  public login = true;
+
   // Firestore object
   private fs: Firestore;
   private fsQM: FirestoreQM;
@@ -50,7 +56,8 @@ export class RegistrationStepperComponent implements OnInit {
 
   constructor( private _formBuilder: FormBuilder,
                private _fileUploadService: FileUploadService,
-               private _messagesHandler: MessagesHandlerService) {
+               private _messagesHandler: MessagesHandlerService,
+               public dialog: MatDialog ) {
 
     // Initialize a Firestore and FirestoreQueryManager objects
     this.fs = new Firestore();
@@ -116,6 +123,10 @@ export class RegistrationStepperComponent implements OnInit {
     };
   }
 
+  googleLogin(): void {
+    this.fs.googleLogin();
+  }
+
   public register( evt: Event ): void {
     if( evt[ 'selectedIndex' ] !== this.REGISTER )
       return;
@@ -130,7 +141,20 @@ export class RegistrationStepperComponent implements OnInit {
       this.firstFormGroup.controls[ 'email' ].value,
       this.firstFormGroup.controls[ 'password' ].value
     ).then( function( res ) {
-      fsU.updateUser( self.fillUserProperties() );
+
+      if ( res.success ) {
+        fsU.updateUser(self.fillUserProperties());
+      }
+    });
+  }
+
+  public openDialog(): void {
+    let dialogRef = this.dialog.open( RegistrationDialogComponent, {
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log( 'The dialog was closed' );
     });
   }
 }

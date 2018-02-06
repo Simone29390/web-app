@@ -4,6 +4,7 @@ import {FirestoreUsers} from "./firestore.users";
 
 class Firestore {
   static db: firebase.firestore.Firestore;
+  static fdb: firebase.database.Database;
   static fb: firebase.app.App;
 
   static storage: firebase.storage.Storage;
@@ -22,12 +23,12 @@ class Firestore {
   private static init(): void {
     // Initialize Firebase
     let config = {
-      apiKey: "AIzaSyDbSul24AYIRgTbJWMcHe8Z3bo8lU9RUzo",
-      authDomain: "applicazioni-web-63d92.firebaseapp.com",
-      databaseURL: "https://applicazioni-web-63d92.firebaseio.com",
-      projectId: "applicazioni-web-63d92",
-      storageBucket: "applicazioni-web-63d92.appspot.com",
-      messagingSenderId: "1098101396959"
+      apiKey: "AIzaSyD_piYZVRV41FTKFsG33JkROBGFaNysVR0",
+      authDomain: "appriuso.firebaseapp.com",
+      databaseURL: "https://appriuso.firebaseio.com",
+      projectId: "appriuso",
+      storageBucket: "appriuso.appspot.com",
+      messagingSenderId: "1027648136525"
     };
 
     // Initialize firebase App
@@ -35,6 +36,9 @@ class Firestore {
 
     // Initialize Cloud Firestore through Firebase
     Firestore.db = firebase.firestore();
+
+    // Initialize Cloud Firebase
+    Firestore.fdb = firebase.database();
 
     // Get a reference to the storage service, which is used to create references in your storage bucket
     Firestore.storage = firebase.storage();
@@ -51,6 +55,10 @@ class Firestore {
     return Firestore.db;
   }
 
+  public getFirebaseDB(): firebase.database.Database {
+    return Firestore.fdb;
+  }
+
   public getFirestoreStorage(): firebase.storage.Storage {
     return Firestore.storage;
   }
@@ -58,6 +66,32 @@ class Firestore {
   public getFirestoreSorageRef(): firebase.storage.Reference {
     return Firestore.storageRef
   }
+
+  public googleLogin() {
+    // Create an instance of the Google provider object
+    let provider = new firebase.auth.GoogleAuthProvider();
+
+    // Sign-in in popup window
+    firebase.auth().signInWithPopup( provider ).then(
+      function( result ) {
+        // Specify or switch Auth state persistence before or after sign-in.
+        // In this case, specify session only persistence
+        if( result ) console.log( result );
+
+        firebase.auth().setPersistence(
+          firebase.auth.Auth.Persistence.SESSION
+        );
+      }).catch( function( error ) {
+      // Handle Errors here.
+      let errorCode = error.code;
+      let errorMessage = error.message;
+      // The email of the user's account used.
+      let email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      let credential = error.credential;
+    });
+  }
+
 }
 
 // Export original validator but rename it

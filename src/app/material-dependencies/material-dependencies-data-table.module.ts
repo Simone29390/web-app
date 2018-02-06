@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 
 /** Angular Material Generic import */
-import { MatPaginatorModule } from '@angular/material';
+import {MatPaginatorModule, MatTableModule} from '@angular/material';
 
 @NgModule({
-  imports: [ MatPaginatorModule ],
-  exports: [ MatPaginatorModule ]
+  imports: [ MatPaginatorModule, MatTableModule ],
+  exports: [ MatPaginatorModule, MatTableModule ]
 })
 export class MaterialDataTableModule { }
 
