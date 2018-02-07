@@ -19,6 +19,7 @@ export class DonationComponent implements OnInit {
   auctionHigherBidToCompare;
   userkey;
   key;
+  isMobile;
   tooLow;
 
   constructor( private dialogRef: MatDialogRef<DonationComponent>) {
@@ -26,6 +27,17 @@ export class DonationComponent implements OnInit {
     this.price = '';
     this.qm = new FirebaseQM();
     this.tooLow = true;
+
+    // User screen size
+    const screenHeight = window.screen.height;
+    const screenWidth = window.screen.width;
+
+    if (screenWidth <= 768) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
+    }
+
   }
 
   ngOnInit() {
@@ -84,7 +96,7 @@ export class DonationComponent implements OnInit {
 
     const value = newValue * 100;
 
-    this.tooLow = (this.auctionHigherBidToCompare > value);
+    this.tooLow = (this.auctionHigherBidToCompare >= value);
   }
 
 

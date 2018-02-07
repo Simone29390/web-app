@@ -50,6 +50,8 @@ import { ShowcaseExpiredComponent } from './app-main/showcase/showcase-expired.c
 import { ShowcaseWonComponent } from './app-main/showcase/showcase-won.component';
 import { HistoryDonationsComponent } from './app-main/history-donations/history-donations.component';
 import {HistoryDonationService} from "./app-main/history-donations/history-donation.service";
+import { ProfileViewComponent } from './app-main/profile-view/profile-view.component';
+import { NavBarComponent } from './app-main/nav-bar/nav-bar.component';
 
 
 @NgModule({
@@ -75,7 +77,9 @@ import {HistoryDonationService} from "./app-main/history-donations/history-donat
     ShowcaseActiveComponent,
     ShowcaseExpiredComponent,
     ShowcaseWonComponent,
-    HistoryDonationsComponent
+    HistoryDonationsComponent,
+    ProfileViewComponent,
+    NavBarComponent
   ],
   imports: [
     RoutingModule,

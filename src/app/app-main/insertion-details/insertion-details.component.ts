@@ -40,12 +40,23 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
   auctionHigherBidder;
   userkey;
   imagesArray = [];
+  isMobile;
 
   constructor(private activatedRoute: ActivatedRoute, public dialog: MatDialog ) {
     this.qm = new FirebaseQM();
     this.fs = new Firestore();
     this.fb = this.fs.getConfiguredFirebase();
     this.completed = false;
+
+    // User screen size
+    const screenHeight = window.screen.height;
+    const screenWidth = window.screen.width;
+
+    if (screenWidth <= 768) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
+    }
   }
 
   ngOnInit() {
@@ -140,8 +151,8 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
 
   public openDialog(): void {
     let dialogRef = this.dialog.open( DonationComponent, {
-      height: '90%',
-      width: '30%',
+      height: !this.isMobile ? '90%' : '70%',
+      width: !this.isMobile ? '30%' : '100%',
     });
     dialogRef.componentInstance.auctionHigherBidToCompare = this.auctionHigherBidToCompare;
     dialogRef.componentInstance.key = this.key;

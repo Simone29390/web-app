@@ -40,7 +40,7 @@ export class ShowcaseExpiredComponent implements OnInit {
       this.mobile = true;
     } else {
       this.numCol = 4;
-      this.rowHeight = '350px';
+      this.rowHeight = '270px';
       this.mobile = false;
     }
   }

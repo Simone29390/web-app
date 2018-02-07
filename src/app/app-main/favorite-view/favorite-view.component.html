@@ -1,5 +1,5 @@
 
-<div class="main">
+<div class="main" *ngIf="!isMobile">
 
   <app-side-menu></app-side-menu>
 
@@ -9,3 +9,27 @@
 
 
 </div>
+
+
+<mat-sidenav-container>
+
+  <mat-sidenav #sidenav [mode]="mode" [(opened)]="opened" class="wrapper">
+
+    <img src="/assets/wp/app_ace_image.png" class="logo" *ngIf="isMobile">
+
+    <app-profile-view *ngIf="isMobile"></app-profile-view>
+
+
+  </mat-sidenav>
+
+  <mat-sidenav-content *ngIf="isMobile">
+
+    <div class="nav-bar mat-elevation-z2">
+      <app-nav-bar></app-nav-bar>
+    </div>
+
+    <app-showcase-favorite></app-showcase-favorite>
+  </mat-sidenav-content>
+
+
+</mat-sidenav-container>

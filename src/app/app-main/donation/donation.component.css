@@ -6,17 +6,11 @@
   color: rgba(0, 0, 0, 0.54);
 }
 
-.example-full-width {
-  min-width: 1%;
-}
+.example-full-width {min-width: 1%;}
 
-.red {
-  color: red;
-}
+.red {color: red;}
 
-.green {
-  color: green;
-}
+.green {color: green;}
 
 .submit { float: right}
 
@@ -44,9 +38,7 @@ mat-form-field {
   color: rgba(0, 0, 0, 0.54);
 }
 
-.donation {
-  width: 90%;
-}
+.donation {width: 90%;}
 
 mat-checkbox {
   color: rgba(0, 0, 0, 0.54);
@@ -54,4 +46,31 @@ mat-checkbox {
 
 mat-card-actions {
   color: rgba(0, 0, 0, 0.54);
+}
+
+@media only screen and (max-width: 768px) {
+
+  .rule {
+    color: rgba(0, 0, 0, 0.54);
+    background-color: #FAFAFA;
+    width: 100%;
+    max-height: 75px;
+    border: 1px solid #eee;
+    border-bottom: transparent;
+    padding: 5px;
+    display: table;
+  }
+
+  .example-form {
+    min-width: 75px;
+    max-width: 250px;
+    width: 100%;
+    font-size: small;
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  mat-card-content {
+    padding: 0;
+    margin: 0;
+  }
 }

@@ -1,19 +1,13 @@
-.side-menu {
-  height: 100%;
-}
+.side-menu {height: 100%;}
 
-.mat-sidenav-content {
-  width: 185px;
-}
+.mat-sidenav-content {width: 185px;}
 
 .mat-sidenav {
   text-align: center;
   padding: 5px;
 }
 
-.logo {
-  width: 175px;
-}
+.logo {width: 175px;}
 
 .profile {
   margin: 5px;
@@ -29,6 +23,9 @@
   cursor: pointer;
 }
 
-a {
-  text-decoration: none;
+a {text-decoration: none;}
+@media only screen and (max-width: 768px) {
+  .logo {
+    display: none;
+  }
 }

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {SidenavService} from "../side-menu/sidenave-service";
+import {Subscription} from "rxjs/Subscription";
+import {MatSidenav} from "@angular/material";
 
 @Component({
   selector: 'app-donation-view',
@@ -6,10 +9,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./donation-view.component.css']
 })
 export class DonationViewComponent implements OnInit {
+  isMobile = true;
+  @ViewChild( 'sidenav' )
+  private sidenav: MatSidenav;
+  _subscription: Subscription;
+  destination;
 
-  constructor() { }
+  mode;
+  public opened: boolean;
+  constructor( public sidenavService: SidenavService) {
+    // User screen size
+    const screenHeight = window.screen.height;
+    const screenWidth = window.screen.width;
+
+    if (screenWidth <= 768) {
+      this.opened = false;
+      this.mode = 'over';
+      this.isMobile = true;
+    } else {
+      this.opened = true;
+      this.mode = 'side';
+      this.isMobile = false;
+    }
+  }
 
   ngOnInit() {
+    if (this.isMobile) {
+      this.sidenavService.setSidenav( this.sidenav );
+    }
   }
 
 }

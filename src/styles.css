@@ -19,7 +19,12 @@ main {
   margin-top: 90px;
 }
 
+@media only screen and (max-width: 768px) {
+  main {
+    margin-top: 55px;
+  }
 
+}
 
 .material-icons.mat-dark { color: rgba(0, 0, 0, 0.54); }
 .material-icons.mat-dark.mat-inactive { color: rgba(0, 0, 0, 0.26); }

@@ -5,7 +5,7 @@
   width: 80%;
 }
 
-mat-card {
+no-mobile {
   width: 90%;
   position: relative;
   display: -ms-flex;
@@ -92,4 +92,58 @@ mat-card-actions {text-align: center}
   text-align: center;
   width: 100%!important;
   margin: 10px;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+  .nav-bar {
+    text-align: center;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.26);
+  }
+
+  .insertions {
+    width: 100%;
+  }
+
+  mat-card {
+    margin: 5px;
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  .mat-card-image {
+    margin: 10px;
+    object-fit: cover;
+    width:80%;
+    height:80%;
+    padding: 3px;
+
+  }
+
+  .h3 {
+    width: 100%;
+  }
+
+  mat-card-header {
+    width: 100%;
+  }
+  mat-card-content {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    display: -ms-flex;
+    display: -webkit-flex;
+    display: flex;
+
+  }
+
+  .image-primary {
+    width: 100%;
+  }
+
+  .image-gallery {
+    background-color: #FAFAFA;
+  }
+
 }

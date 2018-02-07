@@ -5,7 +5,8 @@
   </button>
 
 
-  <span>Centro del Riuso di Malnate (VA)</span>
+  <span *ngIf="!isMobile">Centro del Riuso di Malnate (VA)</span>
+  <span *ngIf="isMobile">Centro del Riuso</span>
   <span class="spacer"></span>
 
   <span *ngIf="false">

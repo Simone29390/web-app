@@ -1,6 +1,4 @@
-.h2 {
-  margin: 10px;
-}
+.h2 {margin: 10px;}
 
 .section {
   display: flex;
@@ -19,9 +17,7 @@
   height: 60px;
 }
 
-.margin {
-  margin: 0 10px;
-}
+.margin {margin: 0 10px;}
 
 mat-card {
   color: rgba(0, 0, 0, 0.54);
@@ -29,10 +25,7 @@ mat-card {
   font-size: small;
 }
 
-
-.side-menu {
-  height: 100%;
-}
+.side-menu {height: 100%;}
 
 .mat-sidenav-container {
   width: 100%;

@@ -1,11 +1,9 @@
-a {
-  text-decoration: none;
-}
+a {text-decoration: none;}
 
 mat-card {
   display: inline-block;
-  width: 300px;
-  height: 250px;
+  max-width: 300px;
+  max-height: 250px;
   margin: 20px;
   vertical-align: top;
   cursor: pointer;
@@ -23,25 +21,17 @@ mat-card-subtitle, mat-card-content {
   display: -ms-flex;
   display: -webkit-flex;
   display: flex;
-
 }
 
-.image-primary {
-  width: 80%;
-}
-
+.image-primary {width: 80%;}
 
 .image-alone {
-
   width: 100%;
   padding: 2px;
   text-align: center;
 }
 
-
-.image-gallery {
-  background-color: #FAFAFA;
-}
+.image-gallery {background-color: #FAFAFA;}
 
 .thumb {
   margin-top: 10px;
@@ -83,11 +73,10 @@ mat-chip {
     max-height: 70%;
     max-width: 80%;
   }
-
-
 }
 
 @media only screen and (max-width: 768px) {
+
   mat-card {
     display: inline-block;
     width: 200px;

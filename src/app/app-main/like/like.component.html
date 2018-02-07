@@ -1,3 +1,6 @@
-<button *ngIf="!isMyFavorite" mat-icon-button="" (click)="pushFavorite()"><i class="material-icons mat-dark">favorite_border</i></button>
-
-<button *ngIf="isMyFavorite" mat-icon-button="" (click)="pushFavorite()"><i class="material-icons mat-dark">favorite</i></button>
+<button *ngIf="!isMyFavorite" mat-icon-button="" (click)="pushFavorite()">
+  <i class="material-icons mat-dark">favorite_border</i>
+</button>
+<button *ngIf="isMyFavorite" mat-icon-button="" (click)="pushFavorite()">
+  <i class="material-icons mat-dark">favorite</i>
+</button>

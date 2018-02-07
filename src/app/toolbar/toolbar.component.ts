@@ -21,6 +21,8 @@ import {CategoryPanelService} from "../app-main/category-panel/category-panel-se
 
 export class ToolbarComponent implements OnInit  {
 
+  isMobile;
+
   // Firestore object
   private fs: Firestore;
 
@@ -44,6 +46,15 @@ export class ToolbarComponent implements OnInit  {
 
     // Current logged state
     this.logged = false;
+
+    const screenHeight = window.screen.height;
+    const screenWidth = window.screen.width;
+
+    if (screenWidth <= 768) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
+    }
   }
 
   /**
@@ -61,7 +72,7 @@ export class ToolbarComponent implements OnInit  {
   }
   public toggleSidenav(): void {
     this.sidenav.toggle();
-    this.sidenav1.toggle();
+    //this.sidenav1.toggle();
   }
 
   /**
