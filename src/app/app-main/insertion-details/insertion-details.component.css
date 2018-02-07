@@ -5,7 +5,7 @@
   width: 80%;
 }
 
-no-mobile {
+.no-mobile {
   width: 90%;
   position: relative;
   display: -ms-flex;
