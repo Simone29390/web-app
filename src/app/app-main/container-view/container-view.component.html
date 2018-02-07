@@ -1,0 +1,30 @@
+<mat-tab-group class="demo-tab-group" *ngIf="viewPage == 'donation'">
+  <mat-tab label="Attive">
+    <div class="demo-tab-content">
+      <app-showcase-active></app-showcase-active>
+    </div>
+  </mat-tab>
+  <mat-tab label="Scadute">
+    <div class="demo-tab-content">
+      <app-showcase-expired></app-showcase-expired>
+    </div>
+  </mat-tab>
+  <mat-tab label="Aggiudicate">
+    <div class="demo-tab-content">
+      <app-showcase-won></app-showcase-won>
+    </div>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon><i class="material-icons mat-dark">history</i></mat-icon> Storico
+    </ng-template>
+    <div class="demo-tab-content">
+      <app-history-donations></app-history-donations>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+
+<app-showcase-favorite *ngIf="viewPage == 'favorite'"></app-showcase-favorite>
+
+<app-showcase  *ngIf="viewPage == 'home'"></app-showcase>

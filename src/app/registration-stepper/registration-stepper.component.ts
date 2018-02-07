@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Firestore } from "../firestore-cfg/firestore";
 import { FirestoreQM } from "../firestore-cfg/firestoreQueryManager";
-
-import {FileUploadService} from "../services/file-upload/file-upload.service";
-import {MessagesHandlerService} from "../services/error-handler/messages-handler.service";
 import {StringUtils} from "../utility/string.utils";
-import {FirestoreUsers} from "../firestore-cfg/firestore.users";
+import {FirebaseUsers} from "../firestore-cfg/firebase.users";
 import {MatDialog} from "@angular/material";
 import {RegistrationDialogComponent} from "../registration-dialog/registration-dialog.component";
+import {utils} from "protractor";
+import {Utils} from "../utility/utils";
 
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PWD_MIN_LENGTH = 6;
@@ -22,44 +21,19 @@ const PWD_MIN_LENGTH = 6;
   styleUrls: ['./registration-stepper.component.css']
 })
 export class RegistrationStepperComponent implements OnInit {
-  //
-  private MESSAGE: string = 'Ooops!! Unable to upload the photo with that format';
 
-  private MESSAGE_EMAIL_ALREADY_USED: string = 'Ooops!! Email is already used by another account!';
-
-  private REGISTER: number = 2;
-
-  // Indicates that stepper is in linear mode
+  private REGISTER: number = 1;
   public isLinear: boolean = true;
-
-  // Forms group
   public firstFormGroup: FormGroup;
-  public secondFormGroup: FormGroup;
-
-  // Image path used as background image
-  public imagePath: string;
-
-  // Declare property of password input type
   public hide: boolean = true;
-
   public login = true;
-
-  // Firestore object
   private fs: Firestore;
   private fsQM: FirestoreQM;
-
-  // Firebase initialized object
   private fb: any;
 
-  // File that represent Profile Image
-  private imageBlob: File;
-
   constructor( private _formBuilder: FormBuilder,
-               private _fileUploadService: FileUploadService,
-               private _messagesHandler: MessagesHandlerService,
                public dialog: MatDialog ) {
 
-    // Initialize a Firestore and FirestoreQueryManager objects
     this.fs = new Firestore();
     this.fsQM = new FirestoreQM();
 
@@ -75,51 +49,20 @@ export class RegistrationStepperComponent implements OnInit {
       name:     [ StringUtils.EMPTY, Validators.required ],
       lastname: [ StringUtils.EMPTY, Validators.required ],
       email:    [ StringUtils.EMPTY, Validators.pattern( EMAIL_REGEX ) ],
+      address:    [ StringUtils.EMPTY ],
       password:   [ StringUtils.EMPTY, Validators.minLength( PWD_MIN_LENGTH )],
       telephone:  [ StringUtils.EMPTY ]
     });
-
-    /**
-     * Second block of registration module
-     * @type {FormGroup}
-     */
-    this.secondFormGroup = this._formBuilder.group({
-      profilePhoto: [ StringUtils.EMPTY, Validators.required ],
-      gender: [ 'male', Validators.required ]
-    });
-  }
-
-  public setSrcUrl( evt: any ): void {
-    let self = this;
-
-    // Retrieve File object
-    let fileResponse = this._fileUploadService.getFile( evt, 'image/*' );
-
-    if( fileResponse.success ) {
-      // Validate profilePhoto form control
-      this.secondFormGroup.controls[ 'profilePhoto' ].setValue(true );
-
-      // Update profile image file
-      this.imageBlob = fileResponse.file;
-
-      // Use getBase64 to generate a background image path
-      this._fileUploadService.getBase64( fileResponse.file )
-        .then( function( res ) {
-          // Set image background
-          self.imagePath = res.toString();
-        })
-    } else if( !fileResponse.success && fileResponse.error === this._fileUploadService.UNSUPPORTED_EXTENSION ) {
-      this._messagesHandler.openSnackBar( self.MESSAGE );
-    }
   }
 
   private fillUserProperties(): any {
     return {
-      firstName: this.firstFormGroup.controls[ 'name' ].value,
-      lastName: this.firstFormGroup.controls[ 'lastname' ].value,
-      phoneNumber: this.firstFormGroup.controls[ 'telephone' ].value,
-      photoURL: this.imageBlob,
-      gender: this.secondFormGroup.controls[ 'gender' ].value
+      name: this.firstFormGroup.controls[ 'name' ].value + ' ' +
+        this.firstFormGroup.controls[ 'lastname' ].value,
+      phone: this.firstFormGroup.controls[ 'telephone' ].value,
+      address: this.firstFormGroup.controls[ 'address' ].value,
+      level: 'user',
+      email: this.firstFormGroup.controls[ 'email' ].value,
     };
   }
 
@@ -134,16 +77,24 @@ export class RegistrationStepperComponent implements OnInit {
     // Wrapper of this object
     let self = this;
 
-    let fsU: FirestoreUsers = new FirestoreUsers();
+    let fsU: FirebaseUsers = new FirebaseUsers();
 
     // Creates new user
     fsU.createUser (
+
       this.firstFormGroup.controls[ 'email' ].value,
       this.firstFormGroup.controls[ 'password' ].value
+
     ).then( function( res ) {
 
       if ( res.success ) {
-        fsU.updateUser(self.fillUserProperties());
+
+        fsU.updateUser(self.fillUserProperties()).then( function( res ) {
+
+          if ( res.success ) {
+
+          }
+        });
       }
     });
   }

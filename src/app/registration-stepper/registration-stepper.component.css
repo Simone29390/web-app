@@ -131,7 +131,42 @@ text-align: center;
   margin-left: 10px;
 }
 
+.logo-riuso {
+  width: 70%; height: 70%
+}
+
 @media only screen and (max-width: 768px) {
+
+
+
+  .btn-login-google {
+    width: 60%;
+    height: 35px;
+    font-size: small;
+  }
+
+  .google-logo {
+    width: 50px;
+    height: 20px;
+
+  }
+  .btn-login-email {
+    margin-top: 2%;
+    width: 60%;
+    height: 35px;
+    font-size: small;
+  }
+
+  .logo-riuso {
+    width: 50%; height: 50%
+  }
+
+  .register-req {
+    margin-top: 2%;
+    height: 20px;
+    font-size: small;
+  }
+
   .form-2-col-g-xs {
     display: inline-block;
   }
@@ -142,6 +177,7 @@ text-align: center;
 
   .registration-cards {
     display: block;
+    margin: 5px;
   }
 
   /* Registration description */

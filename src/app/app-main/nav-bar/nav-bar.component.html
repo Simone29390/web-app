@@ -1,0 +1,23 @@
+<a [routerLink]="['/']">
+  <mat-icon *ngIf="isMobile" class="side-button mat-light" matTooltip="See your home"
+            matTooltipPosition="right">home</mat-icon>
+
+  <mat-icon *ngIf="!isMobile" class="side-button" color="primary" matTooltip="See your home"
+            matTooltipPosition="right">home</mat-icon>
+</a>
+
+<a [routerLink]="['/favorite']">
+  <mat-icon *ngIf="isMobile" class="side-button mat-light" matTooltip="See your favorites"
+            matTooltipPosition="right">favorite</mat-icon>
+
+  <mat-icon *ngIf="!isMobile" class="side-button" color="primary" matTooltip="See your favorites"
+            matTooltipPosition="right">favorite</mat-icon>
+</a>
+
+<a [routerLink]="['/donation']">
+  <mat-icon *ngIf="isMobile" class="side-button mat-light" matTooltip="See you donations"
+            matTooltipPosition="right">shopping_basket</mat-icon>
+
+  <mat-icon *ngIf="!isMobile" class="side-button" color="primary" matTooltip="See you donations"
+            matTooltipPosition="right">shopping_basket</mat-icon>
+</a>

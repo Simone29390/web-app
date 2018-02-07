@@ -5,18 +5,17 @@ import {MatSidenav} from "@angular/material";
 
 @Component({
   selector: 'app-donation-view',
-  templateUrl: './donation-view.component.html',
-  styleUrls: ['./donation-view.component.css']
+  templateUrl: './main-view.component.html',
+  styleUrls:['./main-view.component.css']
 })
 export class DonationViewComponent implements OnInit {
   isMobile = true;
   @ViewChild( 'sidenav' )
   private sidenav: MatSidenav;
-  _subscription: Subscription;
-  destination;
-
+  viewPage = 'donation';
   mode;
   public opened: boolean;
+
   constructor( public sidenavService: SidenavService) {
     // User screen size
     const screenHeight = window.screen.height;

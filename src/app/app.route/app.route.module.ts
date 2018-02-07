@@ -7,8 +7,8 @@ import { MainViewComponent } from "../app-main/main-view/main-view.component";
 import { RouteComponent } from './route/route.component';
 import {InsertionDetailsComponent} from "../app-main/insertion-details/insertion-details.component";
 import {NotFoundComponent} from "../not-found/not-found.component";
-import {FavoriteViewComponent} from "../app-main/favorite-view/favorite-view.component";
-import {DonationViewComponent} from "../app-main/donation-view/donation-view.component";
+import {FavoriteViewComponent} from "../app-main/main-view/favorite-view.component";
+import {DonationViewComponent} from "../app-main/main-view/donation-view.component";
 
 const routes: Routes = [
   {

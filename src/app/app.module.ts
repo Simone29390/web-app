@@ -42,8 +42,8 @@ import {ShowcaseService} from "./app-main/showcase/showcase-service";
 import { LikeComponent } from './app-main/like/like.component';
 import {MainViewService} from "./app-main/main-view/main-view-service";
 import { ShowcaseFavoriteComponent } from './app-main/showcase/showcase-favorite.component';
-import { FavoriteViewComponent } from './app-main/favorite-view/favorite-view.component';
-import { DonationViewComponent } from './app-main/donation-view/donation-view.component';
+import { FavoriteViewComponent } from './app-main/main-view/favorite-view.component';
+import { DonationViewComponent } from './app-main/main-view/donation-view.component';
 import { DonationComponent } from './app-main/donation/donation.component';
 import { ShowcaseActiveComponent } from './app-main/showcase/showcase-active.component';
 import { ShowcaseExpiredComponent } from './app-main/showcase/showcase-expired.component';
@@ -52,6 +52,7 @@ import { HistoryDonationsComponent } from './app-main/history-donations/history-
 import {HistoryDonationService} from "./app-main/history-donations/history-donation.service";
 import { ProfileViewComponent } from './app-main/profile-view/profile-view.component';
 import { NavBarComponent } from './app-main/nav-bar/nav-bar.component';
+import { ContainerViewComponent } from './app-main/container-view/container-view.component';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { NavBarComponent } from './app-main/nav-bar/nav-bar.component';
     ShowcaseWonComponent,
     HistoryDonationsComponent,
     ProfileViewComponent,
-    NavBarComponent
+    NavBarComponent,
+    ContainerViewComponent
   ],
   imports: [
     RoutingModule,

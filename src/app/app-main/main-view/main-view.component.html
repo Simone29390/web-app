@@ -2,7 +2,7 @@
 <div class="main" *ngIf="!isMobile">
   <app-side-menu></app-side-menu>
   <div class="main-content">
-    <app-showcase></app-showcase>
+    <app-container-view [viewPage]="viewPage"></app-container-view>
   </div>
   <div class="main-filter">
     <app-category-panel></app-category-panel>
@@ -20,7 +20,7 @@
     <div class="nav-bar mat-elevation-z2">
       <app-nav-bar></app-nav-bar>
     </div>
-    <app-showcase></app-showcase>
+    <app-container-view [viewPage]="viewPage"></app-container-view>
   </mat-sidenav-content>
 </mat-sidenav-container>
 

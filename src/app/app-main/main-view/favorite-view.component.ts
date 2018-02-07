@@ -5,18 +5,17 @@ import {MatSidenav} from "@angular/material";
 
 @Component({
   selector: 'app-favorite-view',
-  templateUrl: './favorite-view.component.html',
-  styleUrls: ['./favorite-view.component.css']
+  templateUrl: './main-view.component.html',
+  styleUrls:['./main-view.component.css']
 })
 export class FavoriteViewComponent implements OnInit {
   isMobile = true;
   @ViewChild( 'sidenav' )
   private sidenav: MatSidenav;
-  _subscription: Subscription;
-  destination;
-
+  viewPage = 'favorite';
   mode;
   public opened: boolean;
+
   constructor( public sidenavService: SidenavService) {
     // User screen size
     const screenHeight = window.screen.height;

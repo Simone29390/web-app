@@ -7,7 +7,7 @@ import {MatSidenav} from "@angular/material";
 @Component({
   selector: 'app-main-view',
   templateUrl: './main-view.component.html',
-  styleUrls: ['./main-view.component.css']
+  styleUrls:['./main-view.component.css']
 })
 
 export class MainViewComponent implements OnInit, OnDestroy {
@@ -16,7 +16,7 @@ export class MainViewComponent implements OnInit, OnDestroy {
   private sidenav: MatSidenav;
   _subscription: Subscription;
   destination;
-
+  viewPage = 'home';
   mode;
   public opened: boolean;
 
