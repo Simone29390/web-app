@@ -102,9 +102,9 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
 
       querySnapshot.forEach(function (snapshot) {
 
-        let cat =  snapshot.child('category').val();
+        let cat =  snapshot.child('category').val() ;
 
-        if (disabled || checked[cat]) {
+        if (disabled || checked[cat - 1]) {
 
           obj.push({
             key           : snapshot.child('key').val(),

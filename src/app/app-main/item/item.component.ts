@@ -52,23 +52,23 @@ export class ItemComponent implements OnInit {
 
   getCategoryName(id: string) {
     switch (id) {
-      case '0':
-        return 'Abbigliamento e accessori';
       case '1':
-        return 'Elettrodomestici';
+        return 'Abbigliamento e accessori';
       case '2':
-        return 'Film e Libri';
+        return 'Elettrodomestici';
       case '3':
-        return 'Infanzia e Bambini';
+        return 'Film e Libri';
       case '4':
-        return 'Mobili';
+        return 'Infanzia e Bambini';
       case '5':
-        return 'Oggetti da Cucina';
+        return 'Mobili';
       case '6':
-        return 'Oggetti di Arredamento';
+        return 'Oggetti da Cucina';
       case '7':
-        return 'Oggetti Sportivi';
+        return 'Oggetti di Arredamento';
       case '8':
+        return 'Oggetti Sportivi';
+      case '9':
         return 'Altre Categorie';
     }
     return 'Altre Categorie';
