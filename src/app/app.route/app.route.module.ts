@@ -14,12 +14,12 @@ const routes: Routes = [
   {
     path: '',
     component: MainViewComponent,
-    canActivate: [LoginActivate]
+    /// canActivate: [LoginActivate]
   },
   {
     path: 'login',
     component: RegistrationStepperComponent,
-    canActivate: [LoginActivate]
+    // canActivate: [LoginActivate]
   },
   {
     path: 'dashboard/:id',

@@ -46,7 +46,7 @@ export class LoginActivate implements CanActivate {
 
     // On user auth change select correct page
     fb.auth().onAuthStateChanged( function( user ) {
-      if ( Boolean( user ) && self.router.url !== self.ROUTE.root ) {
+      if ( Boolean( user ) && user != null && self.router.url !== self.ROUTE.root ) {
         //self.router.navigate([self.ROUTE.showcase]);
 
         const ref = self.qm.getReference( 'User' );

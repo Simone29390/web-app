@@ -3,6 +3,9 @@ import {Firestore} from "../../firestore-cfg/firestore";
 import {FirebaseQM} from "../../firestore-cfg/firebaseQueryManager";
 import * as firebase from "firebase";
 import Query = firebase.database.Query;
+import {MatDialog} from "@angular/material";
+import {RegistrationDialogComponent} from "../../registration-dialog/registration-dialog.component";
+import {RegistrationStepperComponent} from "../../registration-stepper/registration-stepper.component";
 
 @Component({
   selector: 'app-profile-view',
@@ -21,11 +24,14 @@ export class ProfileViewComponent implements OnInit {
   level;
   photoURL;
 
-  constructor() {
+  isLogged;
+
+  constructor( public dialog: MatDialog ) {
     this.qm = new FirebaseQM();
     this.fs = new Firestore();
     this.fb = this.fs.getConfiguredFirebase();
     this.completed = false;
+
 
     // User screen size
     const screenHeight = window.screen.height;
@@ -45,9 +51,15 @@ export class ProfileViewComponent implements OnInit {
     let self = this;
 
     this.fb.auth().onAuthStateChanged( function( user ) {
-      self.userkey = user['uid'];
-      self.photoURL = user['photoURL'];
-      self.getProfile(self.userkey);
+
+      if ( Boolean( user ) && user != null) {
+        self.isLogged = true;
+        self.userkey = user['uid'];
+        self.photoURL = user['photoURL'];
+        self.getProfile(self.userkey);
+      } else {
+        self.isLogged = false;
+      }
     });
   }
 
@@ -65,6 +77,31 @@ export class ProfileViewComponent implements OnInit {
       self.level =  querySnapshot.child('level').val();
 
       self.completed = true;
+    });
+  }
+
+  googleLogin(): void {
+    this.fs.googleLogin();
+  }
+
+  public openDialog(): void {
+    let dialogRef = this.dialog.open( RegistrationDialogComponent, {
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log( 'The dialog was closed' );
+    });
+  }
+
+  public openDialogReg(): void {
+    let dialogRef = this.dialog.open( RegistrationStepperComponent, {
+      height: !this.isMobile ? '90%' : '70%',
+      width: !this.isMobile ? '30%' : '100%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log( 'The dialog was closed' );
     });
   }
 

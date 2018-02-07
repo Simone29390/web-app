@@ -6,6 +6,10 @@
   display: none!important;
 }
 
+.button {
+  margin-top: 20px;
+}
+
 /* Registration form */
 .registration-cards {
   display: -ms-flex;

@@ -94,7 +94,7 @@ import { ContainerViewComponent } from './app-main/container-view/container-view
       apiKey: 'AIzaSyCt__SEyx4mW-r0n8neNFVj0lQN0LWBCdc'
     })
   ],
-  entryComponents: [ RegistrationDialogComponent, DonationComponent],
+  entryComponents: [ RegistrationDialogComponent, RegistrationStepperComponent, DonationComponent],
   providers: [
     AngularFireDatabaseProvider,
     EventEmitterService,

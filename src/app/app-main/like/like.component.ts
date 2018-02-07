@@ -33,8 +33,12 @@ export class LikeComponent implements OnInit {
     let self = this;
 
     this.fb.auth().onAuthStateChanged( function( user ) {
-      self.user = user;
-      self.checkIfFavoriteSetted(user['uid']);
+
+      if ( Boolean( user ) && user != null) {
+
+        self.user = user;
+        self.checkIfFavoriteSetted(user['uid']);
+      }
     });
 
     self.isMyFavorite = false;

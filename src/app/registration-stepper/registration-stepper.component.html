@@ -1,101 +1,71 @@
-<mat-card class="registration-cards">
-  <div class="registration-description-card">
+<mat-horizontal-stepper class="registration-stepper" [linear]="isLinear" (selectionChange)="register($event)">
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Fill out general information</ng-template>
 
-    <img src="/assets/wp/app_ace_image.png" class="logo-riuso">
-
-  </div>
-
-  <div class="registration-stepper-card">
-
-
-    <div *ngIf="login">
-      <button mat-raised-button  class="btn-login-google" (click)="googleLogin()">
-        <mat-icon aria-label="Log In with Google" class="google-logo"></mat-icon>
-        <small>Log In with Google</small>
-      </button>
-    </div>
-    <div *ngIf="login">
-      <button mat-raised-button  color="warn" class="btn-login-email" (click)="openDialog()">
-        <mat-icon aria-label="Log In with Email">email</mat-icon>
-        <small>Log In with Email</small>
-      </button>
-    </div>
-    <div *ngIf="login">
-      <button mat-button="" class="register-req" (click)="login = false">
-        <small>Don't have an account yet? Register Now.</small>
-      </button>
-    </div>
-
-
-
-  <mat-horizontal-stepper class="registration-stepper" [linear]="isLinear" (selectionChange)="register($event)" *ngIf="!login">
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out general information</ng-template>
-
-        <div class="form-2-col-g-xs">
-          <mat-form-field class="form-input-lt">
-            <input matInput placeholder="First name" formControlName="name" required>
-            <mat-error>
-              First name <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field class="form-input-rt">
-            <input matInput placeholder="Last name" formControlName="lastname" required>
-            <mat-error>
-              Last name <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="form-2-col-g-xs">
-          <mat-form-field class="form-input-lt">
-            <input matInput autocomplete="email" placeholder="Email" formControlName="email" required>
-            <mat-error>
-              <strong>Required</strong> a valid email address
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field class="form-input-lt">
-            <input matInput autocomplete="address" placeholder="Address" formControlName="address" required>
-            <mat-error>
-              <strong>Required</strong> a valid address
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field class="form-input-rt">
-            <input matInput autocomplete="current-password" placeholder="Enter your password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
-            <mat-icon matSuffix class="material-icons" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            <mat-error>
-              Enter a password of at least <strong>six</strong> characters
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-        <mat-form-field class="full-width">
-          <span matPrefix>+&nbsp;</span>
-          <input type="tel" matInput formControlName="telephone" placeholder="Telephone">
-          <mat-icon matSuffix class="material-icons">mode_edit</mat-icon>
-          <mat-hint align="start">
-            <strong>Enter your number to be contactable</strong>
-          </mat-hint>
+      <div class="form-2-col-g-xs">
+        <mat-form-field class="form-input-lt">
+          <input matInput placeholder="First name" formControlName="name" required>
+          <mat-error>
+            First name <strong>required</strong>
+          </mat-error>
         </mat-form-field>
 
-        <div>
-          <button mat-raised-button (click)="login = true" color="primary">Back</button>
-          <button class="btn-right" mat-raised-button matStepperNext color="primary">Confirm</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <mat-step #registrationStep>
-      <ng-template matStepLabel>Done</ng-template>
-      You are now done.
-      <div>
-        <button mat-raised-button matStepperPrevious color="primary">Back</button>
+        <mat-form-field class="form-input-rt">
+          <input matInput placeholder="Last name" formControlName="lastname" required>
+          <mat-error>
+            Last name <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
       </div>
-    </mat-step>
-  </mat-horizontal-stepper>
-  </div>
-</mat-card>
+
+      <div class="form-2-col-g-xs">
+        <mat-form-field class="form-input-lt">
+          <input matInput autocomplete="email" placeholder="Email" formControlName="email" required>
+          <mat-error>
+            <strong>Required</strong> a valid email address
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field class="form-input-rt">
+          <input matInput autocomplete="current-password" placeholder="Enter your password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+          <mat-icon matSuffix class="material-icons" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error>
+            Enter a password of at least <strong>six</strong> characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <mat-form-field class="full-width">
+        <input matInput autocomplete="address" placeholder="Address" formControlName="address" required>
+        <mat-error>
+          <strong>Required</strong> a valid address
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <span matPrefix>+&nbsp;</span>
+        <input type="tel" matInput formControlName="telephone" placeholder="Telephone">
+        <mat-icon matSuffix class="material-icons">mode_edit</mat-icon>
+        <mat-hint align="start">
+          <strong>Enter your number to be contactable</strong>
+        </mat-hint>
+      </mat-form-field>
+
+      <div class="button">
+        <button mat-raised-button (click)="close()" color="primary">Back</button>
+        <button class="btn-right" mat-raised-button matStepperNext color="primary">Confirm</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step #registrationStep>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-raised-button matStepperPrevious color="primary">Back</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

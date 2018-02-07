@@ -42,6 +42,8 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
   imagesArray = [];
   isMobile;
 
+  isLogged;
+
   constructor(private activatedRoute: ActivatedRoute, public dialog: MatDialog ) {
     this.qm = new FirebaseQM();
     this.fs = new Firestore();
@@ -64,8 +66,14 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
     let self = this;
 
     this.fb.auth().onAuthStateChanged( function( user ) {
-      self.userkey = user['uid'];
 
+      if ( Boolean( user ) && user != null) {
+
+        self.userkey = user['uid'];
+        self.isLogged = true;
+      } else {
+        self.isLogged = false;
+      }
       self.subscription = self.activatedRoute.paramMap.subscribe(params => {
         let id = params.get('id');
 
@@ -112,7 +120,11 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
         }
       }
 
-      self.isHigherBidder = (self.auctionHigherBidder === self.userkey);
+      if (self.isLogged) {
+        self.isHigherBidder = (self.auctionHigherBidder === self.userkey);
+      } else {
+        self.isHigherBidder = false;
+      }
 
       self.primaryImage = self.imagesArray[0];
 
@@ -150,6 +162,9 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
   }
 
   public openDialog(): void {
+
+    if (!this.isLogged) return;
+
     let dialogRef = this.dialog.open( DonationComponent, {
       height: !this.isMobile ? '90%' : '70%',
       width: !this.isMobile ? '30%' : '100%',

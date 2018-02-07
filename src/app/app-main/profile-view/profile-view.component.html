@@ -1,4 +1,4 @@
-<mat-card class="profile">
+<mat-card class="profile" *ngIf="isLogged">
   <mat-card-header>
     <img mat-card-avatar [src]=photoURL>
     <mat-card-title>{{ name}}</mat-card-title>
@@ -13,3 +13,23 @@
 
   </mat-card-actions>
 </mat-card>
+
+<div class="login" *ngIf="!isLogged">
+  <div class="button">
+    <button mat-raised-button  class="btn-login-google" (click)="googleLogin()">
+      <mat-icon aria-label="Log In with Google" class="google-logo"></mat-icon>
+      <small>Log In with Google</small>
+    </button>
+  </div>
+  <div class="button">
+    <button mat-raised-button  color="warn" class="btn-login-email" (click)="openDialog()">
+      <mat-icon aria-label="Log In with Email">email</mat-icon>
+      <small>Log In with Email</small>
+    </button>
+  </div>
+  <div class="button">
+    <button mat-button=""  class="register-req" (click)="openDialogReg()">
+      <small>Register Now.</small>
+    </button>
+  </div>
+</div>

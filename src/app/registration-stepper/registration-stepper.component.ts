@@ -4,7 +4,7 @@ import { Firestore } from "../firestore-cfg/firestore";
 import { FirestoreQM } from "../firestore-cfg/firestoreQueryManager";
 import {StringUtils} from "../utility/string.utils";
 import {FirebaseUsers} from "../firestore-cfg/firebase.users";
-import {MatDialog} from "@angular/material";
+import {MatDialog, MatDialogRef} from "@angular/material";
 import {RegistrationDialogComponent} from "../registration-dialog/registration-dialog.component";
 import {utils} from "protractor";
 import {Utils} from "../utility/utils";
@@ -32,7 +32,8 @@ export class RegistrationStepperComponent implements OnInit {
   private fb: any;
 
   constructor( private _formBuilder: FormBuilder,
-               public dialog: MatDialog ) {
+               public dialog: MatDialog,
+               private dialogRef: MatDialogRef<RegistrationStepperComponent>) {
 
     this.fs = new Firestore();
     this.fsQM = new FirestoreQM();
@@ -92,7 +93,7 @@ export class RegistrationStepperComponent implements OnInit {
         fsU.updateUser(self.fillUserProperties()).then( function( res ) {
 
           if ( res.success ) {
-
+            self.close();
           }
         });
       }
@@ -107,5 +108,9 @@ export class RegistrationStepperComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       //console.log( 'The dialog was closed' );
     });
+  }
+
+  public close() {
+    this.dialogRef.close();
   }
 }
