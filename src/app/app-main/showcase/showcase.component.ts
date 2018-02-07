@@ -35,6 +35,11 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   insertions;
   public completed: boolean;
   _subscription: Subscription;
+  haNoItems;
+  imagesArray = [];
+  numCol;
+  rowHeight;
+  mobile;
 
   constructor( public showcaseService: ShowcaseService ) {
     this.qm = new FirebaseQM();
@@ -43,6 +48,21 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     this.showcaseService.set(
       {checked: [], disabled: true}
     );
+
+    // User screen size
+    const screenHeight = window.screen.height;
+    const screenWidth = window.screen.width;
+
+    if (screenWidth <= 768) {
+      this.numCol = 2;
+      this.rowHeight = '180px';
+      this.mobile = true;
+    } else {
+      this.numCol = 3;
+      this.rowHeight = '350px';
+      this.mobile = false;
+    }
+
   }
 
   ngOnInit() {
@@ -65,6 +85,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     // Init view
     self.insertions = [];
     this.completed = false;
+    self.haNoItems = true;
 
     const ref = this.qm.getReference( 'Insertion' );
 
@@ -91,14 +112,21 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
             category      : snapshot.child('category').val(),
             title         : snapshot.child('title').val(),
             description   : snapshot.child('description').val(),
-            image         : snapshot.child('images').child('image1').val(),
+            image1         : snapshot.child('images').child('image1').val(),
+            image3         : snapshot.child('images').child('image2').val(),
+            image4         : snapshot.child('images').child('image3').val(),
+            image5         : snapshot.child('images').child('image4').val(),
+            image6         : snapshot.child('images').child('image5').val(),
+            image7         : snapshot.child('images').child('image6').val(),
           });
         }
       });
 
       self.insertions = obj;
+      self.haNoItems = (self.insertions.length <= 0);
 
       self.completed = true;
+    }).catch(function (error) {
     });
 
   }

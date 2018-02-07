@@ -6,8 +6,8 @@ import {Firestore} from "../../firestore-cfg/firestore";
 
 @Component({
   selector: 'app-showcase-favorite',
-  templateUrl: './showcase-favorite.component.html',
-  styleUrls: ['./showcase-favorite.component.css']
+  templateUrl: './showcase.component.html',
+  styleUrls: ['./showcase.component.css']
 })
 export class ShowcaseFavoriteComponent implements OnInit {
   private fs: Firestore;
@@ -17,6 +17,10 @@ export class ShowcaseFavoriteComponent implements OnInit {
   public completed: boolean;
   private fb: firebase.app.App;
   private user;
+  haNoItems;
+  numCol;
+  rowHeight;
+  mobile;
 
   constructor(  ) {
     this.fs = new Firestore();
@@ -24,6 +28,20 @@ export class ShowcaseFavoriteComponent implements OnInit {
     this.qm = new FirebaseQM();
 
     this.completed = false;
+
+    // User screen size
+    const screenHeight = window.screen.height;
+    const screenWidth = window.screen.width;
+
+    if (screenWidth <= 768) {
+      this.numCol = 2;
+      this.rowHeight = '180px';
+      this.mobile = true;
+    } else {
+      this.numCol = 4;
+      this.rowHeight = '350px';
+      this.mobile = false;
+    }
   }
 
   ngOnInit() {
@@ -43,6 +61,7 @@ export class ShowcaseFavoriteComponent implements OnInit {
     // Init view
     self.insertions = [];
     this.completed = false;
+    self.haNoItems = true;
 
     const ref = this.qm.getReference( 'Favorite' );
     const groupRef = this.qm.getReference( 'Insertion' );
@@ -64,10 +83,16 @@ export class ShowcaseFavoriteComponent implements OnInit {
             category      : snapshot1.child('category').val(),
             title         : snapshot1.child('title').val(),
             description   : snapshot1.child('description').val(),
-            image         : snapshot1.child('images').child('image1').val(),
+            image1         : snapshot1.child('images').child('image1').val(),
+            image3         : snapshot1.child('images').child('image2').val(),
+            image4         : snapshot1.child('images').child('image3').val(),
+            image5         : snapshot1.child('images').child('image4').val(),
+            image6         : snapshot1.child('images').child('image5').val(),
+            image7         : snapshot1.child('images').child('image6').val(),
           });
         });
 
+        self.haNoItems = false;
       });
 
       self.completed = true;

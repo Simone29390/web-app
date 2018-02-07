@@ -11,8 +11,8 @@
 
 .main-content {
   margin: 10px 10px 10px 10px;
-  width: 70%;
-  min-height: 80%;
+  width: 100%;
+  min-height: 700px;
 }
 
 
@@ -40,6 +40,32 @@
     margin: 20px;
     width: auto;
   }
+
+  .side-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .app-body {
+    overflow: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 64px;
+  }
+
+  .app-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
 }
 
 
@@ -50,8 +76,11 @@
     width: 40%;
   }
 
+
   .registration-stepper-card {
     margin: 20px 10px 20px 20px;
     width: 60%;
   }
+
+
 }

@@ -11,13 +11,27 @@ import {MainViewService} from "../main-view/main-view-service";
 export class SideMenuComponent implements OnInit {
   @ViewChild( 'sidenav' )
   private sidenav: MatSidenav;
+  mode;
+  isMobile;
 
 
   public opened: boolean;
 
   constructor( private sidenavService: SidenavService) {
 
-    this.opened = true;
+
+    const screenHeight = window.screen.height;
+    const screenWidth = window.screen.width;
+
+    if (screenWidth <= 768) {
+      this.opened = false;
+      this.mode = 'over';
+      this.isMobile = true;
+    } else {
+      this.opened = true;
+      this.mode = 'side';
+      this.isMobile = false;
+    }
 
   }
 

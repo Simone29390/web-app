@@ -1,5 +1,5 @@
 <mat-sidenav-container class="side-menu">
-  <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+  <mat-sidenav #sidenav [mode]="mode" [(opened)]="opened" class="wrapper">
     <img src="/assets/wp/app_ace_image.png" class="logo">
     <mat-card class="profile">
       <mat-card-header>
@@ -19,10 +19,7 @@
 
   </mat-sidenav>
 
-
-
-
-  <mat-sidenav-content>
+  <mat-sidenav-content *ngIf="!isMobile">
 
 
 

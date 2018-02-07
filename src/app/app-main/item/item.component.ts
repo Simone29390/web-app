@@ -12,12 +12,42 @@ import Query = firebase.firestore.Query;
 export class ItemComponent implements OnInit {
   @Input() insertion: object;
   insertionId: string;
+  imagesArray = [];
+  primaryImage;
+  isMobile;
 
   constructor() {
+
+    // User screen size
+    const screenHeight = window.screen.height;
+    const screenWidth = window.screen.width;
+
+    if (screenWidth <= 768) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
+    }
   }
 
   ngOnInit() {
     this.insertionId = this.insertion['key'];
+
+    let image = [];
+    this.primaryImage = this.insertion['image1'];
+
+    if (!this.isMobile) {
+
+      image[0] = this.insertion['image2'];
+      image[1] = this.insertion['image3'];
+      image[2] = this.insertion['image4'];
+      /*image[3] =  this.insertion['image5'];
+      image[4] =  this.insertion['image6'];*/
+    }
+    for (let i = 0; i < image.length; i++) {
+      if (image[i] != null) {
+        this.imagesArray.push(image[i]);
+      }
+    }
   }
 
   getCategoryName(id: string) {

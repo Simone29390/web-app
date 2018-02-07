@@ -1,5 +1,5 @@
 
-<mat-card>
+<mat-card class="search">
 <span>
     <form class="cube-form">
       <input #search type="search" placeholder="Search">
@@ -7,7 +7,7 @@
   </span>
 </mat-card>
 
-<mat-grid-list cols="4"  rowHeight="350px" *ngIf="completed">
+<mat-grid-list [cols]="numCol"  [rowHeight]=rowHeight  *ngIf="completed && !haNoItems">
 
   <mat-grid-tile *ngFor="let insertion of (insertions | searchFilter: search.value )">
 
@@ -17,7 +17,14 @@
 
 </mat-grid-list>
 
+<mat-card class="no-items" *ngIf="completed && haNoItems">
+  <mat-card-header>
+    <mat-icon color="warn">sentiment_very_dissatisfied</mat-icon>
+    <mat-card-title>Non ci sono oggetti da mostrare</mat-card-title>
+    <mat-card-subtitle>Riprova più tardi</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
 
-<div class="spinner-container" *ngIf="!completed">
-  <mat-spinner class="loader"></mat-spinner>
-</div>
+
+
+<mat-progress-bar mode="indeterminate" *ngIf="!completed"></mat-progress-bar>

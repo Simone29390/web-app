@@ -1,7 +1,6 @@
 <!--<a [routerLink]="['/dashboard', insertionId]">-->
 <mat-card>
 
-  <app-like class="favorite" [key]="insertionId"></app-like>
 
   <mat-card-header>
     <a [routerLink]="['/dashboard', insertionId]">
@@ -9,14 +8,35 @@
     </a>
   </mat-card-header>
   <a [routerLink]="['/dashboard', insertionId]">
-  <img mat-card-image [src]="insertion.image" class="mat-elevation-z1">
-  <mat-card-content>
-    <h6>{{ getCategoryName(insertion.category) }}
+
+    <div class="image-alone" *ngIf="imagesArray.length == 0">
+
+    <img mat-card-image [src]="primaryImage" class="mat-elevation-z1" *ngIf="imagesArray.length == 0">
+    </div>
+    <div class="image-content" *ngIf="imagesArray.length > 0">
+
+      <div class="image-primary">
+
+        <img mat-card-image [src]="primaryImage" class="mat-elevation-z1">
+
+      </div>
+      <div class="image-gallery">
+
+        <section *ngFor="let image of imagesArray" class="section">
+          <img  [src]="image" class="thumb mat-elevation-z2" (click)="changePrimaryImage(image)">
+        </section>
+      </div>
+    </div>
+      <mat-card-content>
+    <h5 class="category">{{ getCategoryName(insertion.category) }}
 
 
-    </h6>
+    </h5>
 
   </mat-card-content>
   </a>
+
+  <app-like class="favorite" [key]="insertionId"></app-like>
+
 </mat-card>
 <!--</a>-->

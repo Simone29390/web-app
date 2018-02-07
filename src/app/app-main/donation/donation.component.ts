@@ -41,6 +41,10 @@ export class DonationComponent implements OnInit {
 
   public pushDonation() {
 
+    if (this.price === null || this.price.length <= 0) {
+      alert("Input your offer!");
+    }
+
     if (!this.checked) {
       alert("Check the box!");
     }

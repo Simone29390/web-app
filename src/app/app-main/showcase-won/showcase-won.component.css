@@ -1,7 +1,12 @@
 
 
-mat-card{border-radius: 100px; padding: 10px}
 
+
+.search {border-radius: 100px; padding: 10px}
+
+.no-items {
+  margin: 30px;
+}
 .cube-form input {
   font-size: x-large;
   width: 100%;
@@ -37,3 +42,4 @@ mat-card{border-radius: 100px; padding: 10px}
   width: 100%!important;
   margin: 10px;
 }
+
