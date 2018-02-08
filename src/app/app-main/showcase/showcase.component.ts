@@ -5,6 +5,7 @@ import {FirebaseQM} from "../../firestore-cfg/firebaseQueryManager";
 import { Pipe, PipeTransform} from '@angular/core';
 import {ShowcaseService} from "./showcase-service";
 import { Subscription } from 'rxjs/Rx';
+import {Firestore} from "../../firestore-cfg/firestore";
 
 @Pipe({
   name: 'searchFilter'
@@ -40,9 +41,20 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   numCol;
   rowHeight;
   mobile;
+  private fs: Firestore;
+  private fb: firebase.app.App;
+  private user: firebase.User;
+  isLogged: boolean;
+  isValidated = true;
 
   constructor( public showcaseService: ShowcaseService ) {
     this.qm = new FirebaseQM();
+    this.fs = new Firestore();
+    this.fb = this.fs.getConfiguredFirebase();
+
+    this.fs = new Firestore();
+    this.fb = this.fs.getConfiguredFirebase();
+
 
     this.completed = false;
     this.showcaseService.set(
@@ -66,12 +78,33 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    let self = this;
+
+    this.fb.auth().onAuthStateChanged( function( user ) {
+
+      if ( Boolean( user ) && user != null) {
+        self.isLogged = true;
+        user.providerData.forEach(function (profile) {
+          self.isValidated = user.emailVerified || profile.providerId == 'google.com';
+        });
+        self.user = user;
+      } else {
+        self.isLogged = false;
+        self.isValidated = true;
+      }
+    });
+
+
 
     this._subscription = this.showcaseService.filter.subscribe((value) => {
       this.filter = value;
 
       this.combineInsetions();
     });
+  }
+
+  sendVerification() {
+    this.user.sendEmailVerification();
   }
 
   ngOnDestroy() {

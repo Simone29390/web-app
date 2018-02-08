@@ -14,8 +14,9 @@ export class NavBarComponent implements OnInit {
   isMobile = true;
   private fs: Firestore;
   private fb: firebase.app.App;
-  private user;
+
   isLogged: boolean;
+  isValidated: boolean;
 
   constructor() {
     this.fs = new Firestore();
@@ -46,10 +47,15 @@ export class NavBarComponent implements OnInit {
       if ( Boolean( user ) && user != null) {
 
         self.isLogged = true;
+        user.providerData.forEach(function (profile) {
+          self.isValidated = user.emailVerified || profile.providerId == 'google.com';
+        });
       } else {
         self.isLogged = false;
+        self.isValidated = false;
       }
     });
   }
+
 
 }

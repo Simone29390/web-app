@@ -22,6 +22,7 @@ export class ShowcaseActiveComponent implements OnInit {
   numCol;
   rowHeight;
   mobile;
+  isValidated = true;
 
   constructor(  ) {
     this.fs = new Firestore();
@@ -115,7 +116,9 @@ export class ShowcaseActiveComponent implements OnInit {
 
   }
 
-
+  sendVerification() {
+    this.user.sendEmailVerification();
+  }
 
 
 }

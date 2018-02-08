@@ -1,4 +1,18 @@
 
+.not-verificated {
+  text-align: center;
+  background-color: #FAFAFA;
+  color: #333333;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.not-verificated .mat-card-header {
+  color: red;
+  font-size: medium;
+}
+
+
 .search {border-radius: 100px; padding: 10px}
 
 .no-items {margin: 30px;}

@@ -23,6 +23,7 @@ export class ShowcaseWonComponent implements OnInit {
   numCol;
   rowHeight;
   mobile;
+  isValidated = true;
 
   constructor(  ) {
     this.fs = new Firestore();
@@ -117,6 +118,8 @@ export class ShowcaseWonComponent implements OnInit {
   }
 
 
-
+  sendVerification() {
+    this.user.sendEmailVerification();
+  }
 
 }

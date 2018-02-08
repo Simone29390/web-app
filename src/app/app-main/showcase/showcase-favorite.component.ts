@@ -21,6 +21,7 @@ export class ShowcaseFavoriteComponent implements OnInit {
   numCol;
   rowHeight;
   mobile;
+  isValidated = true;
 
   constructor(  ) {
     this.fs = new Firestore();
@@ -99,6 +100,8 @@ export class ShowcaseFavoriteComponent implements OnInit {
     });
 
   }
-
+  sendVerification() {
+    this.user.sendEmailVerification();
+  }
 
 }
