@@ -43,6 +43,7 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
   isMobile;
 
   isLogged;
+  isValidated;
 
   constructor(private activatedRoute: ActivatedRoute, public dialog: MatDialog, public snackBar: MatSnackBar ) {
     this.qm = new FirebaseQM();
@@ -71,6 +72,11 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
 
         self.userkey = user['uid'];
         self.isLogged = true;
+
+        user.providerData.forEach(function (profile) {
+          self.isValidated = user.emailVerified || profile.providerId == 'google.com';
+        });
+
       } else {
         self.isLogged = false;
       }
@@ -165,6 +171,10 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
 
     if (!this.isLogged) {
       this.openSnackBar("Devi aver effettuato l'accesso!","Avviso");
+      return;
+    }
+    if (!this.isValidated) {
+      this.openSnackBar("Devi convalidare il tuo account!","Avviso");
       return;
     }
 

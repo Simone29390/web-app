@@ -1,10 +1,13 @@
 
 <mat-card *ngIf="!isValidated" class="not-verificated">
-  <mat-card-header >
-    Devi verificare il tuo account, controlla la tua posta.
-  </mat-card-header>  
+  <mat-card-header *ngIf="!mobile">
+    Devi verificare il tuo account, controlla la tua posta
+  </mat-card-header>
+  <div class="warning" *ngIf="mobile">
+    Account non verificato
+  </div>
   <button  color="primary" mat-raised-button=""
-           (click)="sendVerification()">Rispedisci Convalida</button>
+           (click)="sendVerification()">Rispedisci convalida</button>
 </mat-card>
 
 <mat-card class="search">

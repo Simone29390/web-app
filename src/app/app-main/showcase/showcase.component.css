@@ -7,9 +7,10 @@
   margin-bottom: 20px;
 }
 
-.not-verificated .mat-card-header {
+.not-verificated .mat-card-header, .warning {
   color: red;
-  font-size: medium;
+  font-size: large;
+  text-align: center;
 }
 
 
