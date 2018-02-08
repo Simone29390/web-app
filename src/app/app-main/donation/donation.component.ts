@@ -5,6 +5,7 @@ import {FirebaseQM} from "../../firestore-cfg/firebaseQueryManager";
 import {MatDialogRef} from "@angular/material";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {StringUtils} from "../../utility/string.utils";
+import {Utils} from "../../utility/utils";
 
 @Component({
   selector: 'app-donation',
@@ -52,6 +53,9 @@ export class DonationComponent implements OnInit {
   }
 
   public pushDonation() {
+
+
+    let self = this;
 
     if (this.price === null || this.price.length <= 0) {
       alert("Input your offer!");
