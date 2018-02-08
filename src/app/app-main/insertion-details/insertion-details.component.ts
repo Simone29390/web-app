@@ -4,7 +4,7 @@ import {ActivatedRoute, Params} from "@angular/router";
 import * as firebase from "firebase";
 import Query = firebase.database.Query;
 import {FirebaseQM} from "../../firestore-cfg/firebaseQueryManager";
-import {MatDialog} from "@angular/material";
+import {MatDialog, MatSnackBar} from "@angular/material";
 import {DonationComponent} from "../donation/donation.component";
 import {Firestore} from "../../firestore-cfg/firestore";
 
@@ -44,7 +44,7 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
 
   isLogged;
 
-  constructor(private activatedRoute: ActivatedRoute, public dialog: MatDialog ) {
+  constructor(private activatedRoute: ActivatedRoute, public dialog: MatDialog, public snackBar: MatSnackBar ) {
     this.qm = new FirebaseQM();
     this.fs = new Firestore();
     this.fb = this.fs.getConfiguredFirebase();
@@ -163,7 +163,10 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
 
   public openDialog(): void {
 
-    if (!this.isLogged) return;
+    if (!this.isLogged) {
+      this.openSnackBar("Devi aver effettuato l'accesso!","Avviso");
+      return;
+    }
 
     let dialogRef = this.dialog.open( DonationComponent, {
       height: !this.isMobile ? '90%' : '70%',
@@ -177,4 +180,12 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
       //console.log( 'The dialog was closed' );
     });
   }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
+
 }

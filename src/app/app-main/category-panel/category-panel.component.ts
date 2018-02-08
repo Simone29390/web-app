@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatSidenav} from "@angular/material";
+import {MatSidenav, MatSnackBar} from "@angular/material";
 import {SidenavService} from "../side-menu/sidenave-service";
 import {CategoryPanelService} from "./category-panel-service";
 import {ShowcaseComponent} from "../showcase/showcase.component";
@@ -22,7 +22,10 @@ export class CategoryPanelComponent implements OnInit {
 
   sequence = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
 
-  constructor(private sidenavService: CategoryPanelService, public showcase: ShowcaseService) {
+  constructor(
+    private sidenavService: CategoryPanelService,
+    public showcase: ShowcaseService,
+    public snackBar: MatSnackBar) {
 
     this.opened = true;
 
@@ -34,6 +37,19 @@ export class CategoryPanelComponent implements OnInit {
   }
 
   public setFilter(): void {
+
+    let bool = true;
+    for (let i=0; i<this.checked.length; i++) {
+      if (this.checked[i]) bool = false;
+    }
+
+    if (bool && !this.disabled) {
+
+      this.openSnackBar("Devi selezionare dei filtri!","Avviso");
+
+      return;
+    }
+
     this.showcase.set(
       {checked: this.checked, disabled: this.disabled}
     );
@@ -63,6 +79,11 @@ export class CategoryPanelComponent implements OnInit {
     return 'Altre Categorie';
   }
 
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
 
 
 }

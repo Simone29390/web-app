@@ -1,20 +1,20 @@
 <mat-horizontal-stepper class="registration-stepper" [linear]="isLinear" (selectionChange)="register($event)">
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out general information</ng-template>
+      <ng-template matStepLabel>Inserisci i tuoi dati</ng-template>
 
       <div class="form-2-col-g-xs">
         <mat-form-field class="form-input-lt">
-          <input matInput placeholder="First name" formControlName="name" required>
+          <input matInput placeholder="Nome" formControlName="name" required>
           <mat-error>
-            First name <strong>required</strong>
+            Nome <strong>Campo obbligatorio</strong>
           </mat-error>
         </mat-form-field>
 
         <mat-form-field class="form-input-rt">
-          <input matInput placeholder="Last name" formControlName="lastname" required>
+          <input matInput placeholder="Cognome" formControlName="lastname" required>
           <mat-error>
-            Last name <strong>required</strong>
+            Cognome <strong>Campo obbligatorio</strong>
           </mat-error>
         </mat-form-field>
       </div>
@@ -23,49 +23,58 @@
         <mat-form-field class="form-input-lt">
           <input matInput autocomplete="email" placeholder="Email" formControlName="email" required>
           <mat-error>
-            <strong>Required</strong> a valid email address
+            <strong>Campo obbligatorio</strong> un indirizzo email valido
           </mat-error>
         </mat-form-field>
 
 
         <mat-form-field class="form-input-rt">
-          <input matInput autocomplete="current-password" placeholder="Enter your password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+          <input matInput autocomplete="current-password" placeholder="Inserisci una password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
           <mat-icon matSuffix class="material-icons" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
           <mat-error>
-            Enter a password of at least <strong>six</strong> characters
+            Inserisci una password di almeno <strong>sei</strong> carattteri
           </mat-error>
         </mat-form-field>
       </div>
 
 
       <mat-form-field class="full-width">
-        <input matInput autocomplete="address" placeholder="Address" formControlName="address" required>
+        <input matInput autocomplete="address" placeholder="Indirizzo" formControlName="address" required>
         <mat-error>
-          <strong>Required</strong> a valid address
+          <strong>Campo obbligatorio</strong> un indirizzo valido
         </mat-error>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <span matPrefix>+&nbsp;</span>
-        <input type="tel" matInput formControlName="telephone" placeholder="Telephone">
+        <input type="tel" matInput formControlName="telephone" placeholder="Telefono">
         <mat-icon matSuffix class="material-icons">mode_edit</mat-icon>
         <mat-hint align="start">
-          <strong>Enter your number to be contactable</strong>
+          <strong>Inserisci il tuo numero per essere contattabile</strong>
         </mat-hint>
       </mat-form-field>
 
       <div class="button">
-        <button mat-raised-button (click)="close()" color="primary">Back</button>
-        <button class="btn-right" mat-raised-button matStepperNext color="primary">Confirm</button>
+        <button mat-raised-button (click)="close()" color="primary">Annulla</button>
+        <button class="btn-right" mat-raised-button matStepperNext color="primary">Registrati</button>
       </div>
     </form>
   </mat-step>
 
   <mat-step #registrationStep>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-    <div>
-      <button mat-raised-button matStepperPrevious color="primary">Back</button>
+    <ng-template matStepLabel>Fatto</ng-template>
+
+    <div *ngIf="!isError">
+      <h3>Attendi...</h3>
+
+      <mat-spinner></mat-spinner>
+
+      <h4>Al termine dell'operazione, invieremo una mail di convalida al tuo indirizzo.</h4>
     </div>
+
+    <div *ngIf="isError">
+      <h3 style="color: red">{{ errorCode }}</h3>
+    </div>
+
   </mat-step>
 </mat-horizontal-stepper>

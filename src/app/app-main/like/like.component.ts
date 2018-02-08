@@ -22,6 +22,7 @@ export class LikeComponent implements OnInit {
   private qm: FirebaseQM;
   public isMyFavorite;
   private uid;
+  isLogged;
 
   constructor() {
     this.fs = new Firestore();
@@ -35,9 +36,11 @@ export class LikeComponent implements OnInit {
     this.fb.auth().onAuthStateChanged( function( user ) {
 
       if ( Boolean( user ) && user != null) {
-
+        self.isLogged = true;
         self.user = user;
         self.checkIfFavoriteSetted(user['uid']);
+      } else {
+        self.isLogged = false;
       }
     });
 

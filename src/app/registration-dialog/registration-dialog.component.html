@@ -4,22 +4,22 @@
       <mat-form-field class="input-left">
         <input matInput placeholder="Email" formControlName="email" required>
         <mat-error>
-          <strong>Required</strong> a valid email address
+          <strong>Campo obbligatorio</strong> un indirizzo email valido
         </mat-error>
       </mat-form-field>
 
       <mat-form-field class="input-right">
-        <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+        <input matInput placeholder="Inserisci la tua password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
         <mat-icon matSuffix class="material-icons" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
         <mat-error>
-          Enter a password of at least <strong>six</strong> characters
+          Inserisci la tua password di almeno <strong>sei</strong> carattteri
         </mat-error>
       </mat-form-field>
     </div>
 
     <div class="submit-login">
       <button mat-raised-button color="warn" (click)="logIn()">
-        <small>Log In</small>
+        <small>Accedi</small>
       </button>
     </div>
   </form>

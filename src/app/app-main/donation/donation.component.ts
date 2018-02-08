@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from "firebase";
 import Query = firebase.database.Query;
 import {FirebaseQM} from "../../firestore-cfg/firebaseQueryManager";
-import {MatDialogRef} from "@angular/material";
+import {MatDialogRef, MatSnackBar} from "@angular/material";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {StringUtils} from "../../utility/string.utils";
 import {Utils} from "../../utility/utils";
@@ -23,7 +23,7 @@ export class DonationComponent implements OnInit {
   isMobile;
   tooLow;
 
-  constructor( private dialogRef: MatDialogRef<DonationComponent>) {
+  constructor( private dialogRef: MatDialogRef<DonationComponent>, public snackBar: MatSnackBar) {
     this.checked = false;
     this.price = '';
     this.qm = new FirebaseQM();
@@ -58,15 +58,18 @@ export class DonationComponent implements OnInit {
     let self = this;
 
     if (this.price === null || this.price.length <= 0) {
-      alert("Input your offer!");
+      this.openSnackBar("Prima bisogna inserire un'offerta!","Avviso");
+      return;
     }
 
     if (!this.checked) {
-      alert("Check the box!");
+      this.openSnackBar("Devi dare il tuo consenso!","Avviso");
+      return;
     }
 
     if (this.tooLow ) {
-      alert('Your offer is too low!');
+      this.openSnackBar("La tua offerta è troppo bassa","Avviso");
+      return;
     }
 
     const ref = this.qm.getReference( 'Donation' );
@@ -115,4 +118,12 @@ export class DonationComponent implements OnInit {
       self.rule = querySnapshot.child('text_rule').val();
     });
   }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
+
 }

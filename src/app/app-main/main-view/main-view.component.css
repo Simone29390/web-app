@@ -7,7 +7,7 @@ a {text-decoration: none;}
   display: flex;
 }
 
-.main-filter {width: 15%;}
+.main-filter {width: 15%; }
 
 .main-content {
   margin: 10px 10px 10px 10px;

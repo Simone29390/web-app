@@ -53,6 +53,7 @@ import {HistoryDonationService} from "./app-main/history-donations/history-donat
 import { ProfileViewComponent } from './app-main/profile-view/profile-view.component';
 import { NavBarComponent } from './app-main/nav-bar/nav-bar.component';
 import { ContainerViewComponent } from './app-main/container-view/container-view.component';
+import { InformationAccountRequiredComponent } from './app-main/information-account-required/information-account-required.component';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { ContainerViewComponent } from './app-main/container-view/container-view
     HistoryDonationsComponent,
     ProfileViewComponent,
     NavBarComponent,
-    ContainerViewComponent
+    ContainerViewComponent,
+    InformationAccountRequiredComponent
   ],
   imports: [
     RoutingModule,

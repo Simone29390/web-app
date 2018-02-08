@@ -77,7 +77,7 @@ mat-card-actions {text-align: center}
   display: -ms-flex;
   display: -webkit-flex;
   display: flex;
-  min-height: 700px;
+  min-height: 200px;
 }
 
 

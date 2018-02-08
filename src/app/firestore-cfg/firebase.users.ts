@@ -48,6 +48,8 @@ class FirebaseUsers {
 
       let user: firebase.User = this.getLoggedUser();
 
+      if (!user.emailVerified) user.sendEmailVerification();
+
       userParams[ 'userkey' ] = user.uid;
 
       let queryManager: FirebaseQM = new FirebaseQM();

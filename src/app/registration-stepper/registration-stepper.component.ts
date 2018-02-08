@@ -4,7 +4,7 @@ import { Firestore } from "../firestore-cfg/firestore";
 import { FirestoreQM } from "../firestore-cfg/firestoreQueryManager";
 import {StringUtils} from "../utility/string.utils";
 import {FirebaseUsers} from "../firestore-cfg/firebase.users";
-import {MatDialog, MatDialogRef} from "@angular/material";
+import {MatDialog, MatDialogRef, MatSnackBar} from "@angular/material";
 import {RegistrationDialogComponent} from "../registration-dialog/registration-dialog.component";
 import {utils} from "protractor";
 import {Utils} from "../utility/utils";
@@ -30,10 +30,12 @@ export class RegistrationStepperComponent implements OnInit {
   private fs: Firestore;
   private fsQM: FirestoreQM;
   private fb: any;
-
+  isError = false;
+  errorCode;
   constructor( private _formBuilder: FormBuilder,
                public dialog: MatDialog,
-               private dialogRef: MatDialogRef<RegistrationStepperComponent>) {
+               private dialogRef: MatDialogRef<RegistrationStepperComponent>,
+               public snackBar: MatSnackBar) {
 
     this.fs = new Firestore();
     this.fsQM = new FirestoreQM();
@@ -92,11 +94,28 @@ export class RegistrationStepperComponent implements OnInit {
 
         fsU.updateUser(self.fillUserProperties()).then( function( res ) {
 
+          console.log(res)
+
           if ( res.success ) {
+
+            //this.openSnackBar("Accedi alla tua email per convalidare l'Account","Avviso");
+
             self.close();
+          } else {
+            self.isError = true;
+            self.errorCode = res.errorMessage;
           }
-        });
+        }).catch(function (error) {
+          self.isError = true;
+          self.errorCode = error['errorMessage'];
+          });
+      } else {
+        self.isError = true;
+        self.errorCode = res.errorMessage;
       }
+    }).catch(function (error) {
+      self.isError = true;
+      self.errorCode = error['errorMessage'];
     });
   }
 
@@ -112,5 +131,11 @@ export class RegistrationStepperComponent implements OnInit {
 
   public close() {
     this.dialogRef.close();
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }
