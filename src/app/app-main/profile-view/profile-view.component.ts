@@ -38,7 +38,7 @@ export class ProfileViewComponent implements OnInit {
     const screenHeight = window.screen.height;
     const screenWidth = window.screen.width;
 
-    if (screenWidth <= 768) {
+    if (screenWidth <= 1024) {
 
       this.isMobile = true;
     } else {

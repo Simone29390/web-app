@@ -35,10 +35,15 @@ export class ShowcaseExpiredComponent implements OnInit {
     const screenHeight = window.screen.height;
     const screenWidth = window.screen.width;
 
-    if (screenWidth <= 768) {
+    if (screenWidth <= 1024) {
       this.numCol = 2;
-      this.rowHeight = '210px';
+      this.rowHeight = '270px';
       this.mobile = true;
+
+      if (screenWidth < 768) {
+        this.rowHeight = '210px';
+      }
+
     } else {
       this.numCol = 4;
       this.rowHeight = '270px';

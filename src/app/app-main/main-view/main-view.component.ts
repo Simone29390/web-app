@@ -27,7 +27,7 @@ export class MainViewComponent implements OnInit, OnDestroy {
     const screenHeight = window.screen.height;
     const screenWidth = window.screen.width;
 
-    if (screenWidth <= 768) {
+    if (screenWidth <= 1024) {
       this.opened = false;
       this.mode = 'over';
       this.isMobile = true;

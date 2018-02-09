@@ -90,10 +90,15 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     const screenHeight = window.screen.height;
     const screenWidth = window.screen.width;
 
-    if (screenWidth <= 768) {
+    if (screenWidth <= 1024) {
       this.numCol = 2;
-      this.rowHeight = '210px';
+      this.rowHeight = '270px';
       this.mobile = true;
+
+      if (screenWidth < 768) {
+        this.rowHeight = '210px';
+      }
+
     } else {
       this.numCol = 3;
       this.rowHeight = '270px';
@@ -142,13 +147,13 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
 
     // Init view
     self.insertions = [];
-    this.completed = false;
+    self.completed = false;
     self.haNoItems = true;
 
     const ref = this.qm.getReference( 'Insertion' );
 
-    const disabled = this.filter['disabled'];
-    const checked = this.filter['checked'];
+    const disabled = self.filter['disabled'];
+    const checked = self.filter['checked'];
 
     let query: Query = ref
       .orderByChild( 'state')

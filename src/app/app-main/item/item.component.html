@@ -25,7 +25,7 @@
         </section>
       </div>
     </div>
-      <mat-card-content>
+      <mat-card-content *ngIf="!isMobile">
     <h5 class="category">{{ getCategoryName(insertion['category']) }}
 
     </h5>
@@ -33,6 +33,6 @@
   </mat-card-content>
   </a>
 
-  <app-like class="favorite" [key]="insertionId"></app-like>
+  <app-like class="favorite" *ngIf="!isMobile"[key]="insertionId"></app-like>
 
 </mat-card>

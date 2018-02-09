@@ -3,6 +3,8 @@ import {FirestoreInsertion} from "../../firestore-cfg/firestore.insertion";
 import { FirestoreQM } from "../../firestore-cfg/firestoreQueryManager";
 import * as firebase from "firebase";
 import Query = firebase.firestore.Query;
+import {Firestore} from "../../firestore-cfg/firestore";
+import {escapeRegExp} from "tslint/lib/utils";
 
 @Component({
   selector: 'app-item',
@@ -16,13 +18,18 @@ export class ItemComponent implements OnInit {
   primaryImage;
   isMobile;
 
+  private fs: Firestore;
+  private fb: firebase.app.App;
+
   constructor() {
+    this.fs = new Firestore();
+    this.fb = this.fs.getConfiguredFirebase();
 
     // User screen size
     const screenHeight = window.screen.height;
     const screenWidth = window.screen.width;
 
-    if (screenWidth <= 768) {
+    if (screenWidth <= 1024) {
       this.isMobile = true;
     } else {
       this.isMobile = false;
@@ -30,10 +37,19 @@ export class ItemComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    let self = this;
+
     this.insertionId = this.insertion['key'];
 
     let image = [];
-    this.primaryImage = this.insertion['image1'];
+
+    /*let res = this.getThumbFromFirebaseStorage(this.insertion['image1']);
+    res.getDownloadURL().then(function (url) {
+      self.primaryImage = url;
+    }).catch(function (error) {*/
+      self.primaryImage = this.insertion['image1'];
+   // });
 
     if (!this.isMobile) {
 
@@ -72,5 +88,20 @@ export class ItemComponent implements OnInit {
         return 'Altre Categorie';
     }
     return 'Altre Categorie';
+  }
+
+  public getThumbFromFirebaseStorage(URL: string) :firebase.storage.Reference {
+
+    let pos = URL.lastIndexOf("?");
+    let result = URL.substring(0, pos);
+    result = this.replaceAll(result,"https://firebasestorage.googleapis.com/v0/b/appriuso.appspot.com/o/","");
+    result = "gs://appriuso.appspot.com/thumb_" + result;
+
+    return this.fb.storage().refFromURL(result);
+  }
+
+
+  public replaceAll(str, find, replace) :string {
+    return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
   }
 }

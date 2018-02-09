@@ -96,7 +96,7 @@ mat-card-actions {text-align: center}
 }
 
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
 
   .nav-bar {
     text-align: center;

@@ -139,7 +139,7 @@ text-align: center;
   width: 70%; height: 70%
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
 
 
 
@@ -229,7 +229,7 @@ text-align: center;
   width: 80%;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   .user-info {
     display: block;
   }

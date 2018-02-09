@@ -55,7 +55,7 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
     const screenHeight = window.screen.height;
     const screenWidth = window.screen.width;
 
-    if (screenWidth <= 768) {
+    if (screenWidth <= 1024) {
       this.isMobile = true;
     } else {
       this.isMobile = false;
@@ -82,7 +82,7 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
       }
       self.subscription = self.activatedRoute.paramMap.subscribe(params => {
         let id = params.get('id');
-
+        console.log(params.get('id'))
         self.getInsertion( id );
       });
     });
