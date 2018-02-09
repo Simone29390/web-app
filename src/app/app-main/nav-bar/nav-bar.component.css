@@ -10,6 +10,7 @@ a {
   font-size: 50px;
   display: table;
   cursor: pointer;
+  background-color: #FFFFFF;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -20,6 +21,7 @@ a {
     font-size: 50px;
     cursor: pointer;
     display:table-row;
+    background-color: transparent;
   }
 
   mat-icon{

@@ -1,7 +1,8 @@
 .side-menu {height: 100%;
+  background-color: transparent;
 }
 
-.mat-sidenav-content {width: 200px;}
+.mat-sidenav-content {}
 
 .mat-sidenav {
   text-align: center;
@@ -22,6 +23,7 @@
   font-size: 50px;
   display: table;
   cursor: pointer;
+
 }
 
 a {text-decoration: none;}

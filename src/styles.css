@@ -8,9 +8,9 @@ html, body {
   min-height: 100%;
   height: 100%;
 
-
-
-  background-color: #FAFAFA;
+  /*background: url( '/assets/wp/material-design-background.gif' );
+ background-size: cover;*/
+ background-color: #FAFAFA;
 
   overflow-x: hidden;
 }
@@ -32,7 +32,9 @@ main {
 .material-icons.mat-light { color: rgba(255, 255, 255, 1); }
 .material-icons.mat-light.mat-inactive { color: rgba(255, 255, 255, 0.3); }
 
-
+.material-icons.color_green { color: #00FF00; }
+.material-icons.color_white { color: #FFFFFF; }
+.material-icons.color_deep_orange { color: #bf360c }
 
 @media only screen and (max-width: 1024px) {
 

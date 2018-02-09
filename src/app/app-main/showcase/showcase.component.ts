@@ -100,7 +100,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
       }
 
     } else {
-      this.numCol = 3;
+      this.numCol = 4;
       this.rowHeight = '270px';
       this.mobile = false;
     }
@@ -175,13 +175,13 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
             category      : snapshot.child('category').val(),
             title         : snapshot.child('title').val(),
             description   : snapshot.child('description').val(),
-            timemillis   : snapshot.child('timemillis').val(),
-            image1         : snapshot.child('images').child('image1').val(),
-            image3         : snapshot.child('images').child('image2').val(),
-            image4         : snapshot.child('images').child('image3').val(),
-            image5         : snapshot.child('images').child('image4').val(),
-            image6         : snapshot.child('images').child('image5').val(),
-            image7         : snapshot.child('images').child('image6').val(),
+            timemillis    : snapshot.child('timemillis').val(),
+            image1        : snapshot.child('images').child('image1').val(),
+            image3        : snapshot.child('images').child('image2').val(),
+            image4        : snapshot.child('images').child('image3').val(),
+            image5        : snapshot.child('images').child('image4').val(),
+            image6        : snapshot.child('images').child('image5').val(),
+            image7        : snapshot.child('images').child('image6').val(),
           });
         }
       });

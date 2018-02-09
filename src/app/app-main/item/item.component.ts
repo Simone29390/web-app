@@ -44,12 +44,12 @@ export class ItemComponent implements OnInit {
 
     let image = [];
 
-    /*let res = this.getThumbFromFirebaseStorage(this.insertion['image1']);
+    let res = this.getThumbFromFirebaseStorage(this.insertion['image1']);
     res.getDownloadURL().then(function (url) {
       self.primaryImage = url;
-    }).catch(function (error) {*/
+    }).catch(function (error) {
       self.primaryImage = this.insertion['image1'];
-   // });
+    });
 
     if (!this.isMobile) {
 
@@ -61,7 +61,13 @@ export class ItemComponent implements OnInit {
     }
     for (let i = 0; i < image.length; i++) {
       if (image[i] != null) {
-        this.imagesArray.push(image[i]);
+
+        let res = this.getThumbFromFirebaseStorage(image[i]);
+        res.getDownloadURL().then(function (url) {
+          self.imagesArray.push(url);
+        }).catch(function (error) {
+          self.imagesArray.push(image[i]);
+        });
       }
     }
   }

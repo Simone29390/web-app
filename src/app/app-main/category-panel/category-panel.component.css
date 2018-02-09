@@ -25,7 +25,11 @@ mat-card {
   font-size: small;
 }
 
-.side-menu {height: 100%;}
+mat-sidenav-container, mat-sidenav {
+  background-color: transparent;
+}
+
+.side-menu {height: 100%; }
 
 .mat-sidenav-container {
   width: 100%;

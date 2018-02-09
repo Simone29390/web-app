@@ -1,4 +1,8 @@
-<mat-tab-group class="demo-tab-group" *ngIf="viewPage == 'donation'">
+<mat-tab-group
+  class="demo-tab-group"
+  *ngIf="viewPage == 'donation'"
+  [selectedIndex]="selectedTab"
+  (selectedTabChange)="onLinkClick($event)">
   <mat-tab label="Attive">
     <div class="demo-tab-content">
       <app-showcase-active></app-showcase-active>
