@@ -6,6 +6,7 @@ import Query = firebase.database.Query;
 import {MatDialog} from "@angular/material";
 import {RegistrationDialogComponent} from "../../registration-dialog/registration-dialog.component";
 import {RegistrationStepperComponent} from "../../registration-stepper/registration-stepper.component";
+import {SidenavService} from "../side-menu/sidenave-service";
 
 @Component({
   selector: 'app-profile-view',
@@ -26,7 +27,7 @@ export class ProfileViewComponent implements OnInit {
 
   isLogged;
 
-  constructor( public dialog: MatDialog ) {
+  constructor( public dialog: MatDialog, private sidenav: SidenavService ) {
     this.qm = new FirebaseQM();
     this.fs = new Firestore();
     this.fb = this.fs.getConfiguredFirebase();
@@ -81,10 +82,15 @@ export class ProfileViewComponent implements OnInit {
   }
 
   googleLogin(): void {
+
+    this.toggleSidenav();
+
     this.fs.googleLogin();
   }
 
   public openDialog(): void {
+    this.toggleSidenav();
+
     let dialogRef = this.dialog.open( RegistrationDialogComponent, {
 
     });
@@ -95,6 +101,9 @@ export class ProfileViewComponent implements OnInit {
   }
 
   public openDialogReg(): void {
+
+    this.toggleSidenav();
+
     let dialogRef = this.dialog.open( RegistrationStepperComponent, {
       height: !this.isMobile ? '90%' : '70%',
       width: !this.isMobile ? '30%' : '100%',
@@ -103,6 +112,12 @@ export class ProfileViewComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       //console.log( 'The dialog was closed' );
     });
+  }
+
+
+  public toggleSidenav(): void {
+    this.sidenav.toggle();
+    //this.sidenav1.toggle();
   }
 
 }

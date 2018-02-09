@@ -4,6 +4,7 @@ import {DataSource} from '@angular/cdk/collections';
 export interface Data {
   datetime: string;
   value: string;
+  title: string;
   key: string;
 }
 
@@ -29,7 +30,7 @@ export class HistoryDonationsComponent implements OnInit, AfterViewInit {
   public completed: boolean;
   private fb: firebase.app.App;
   private user;
-  displayedColumns = ['datetime', 'value', 'key'];
+  displayedColumns = ['datetime', 'value', 'title', 'key'];
   dataSource = new MatTableDataSource();
   myData: Array < any > ;
   @ViewChild(MatPaginator) paginator: MatPaginator;

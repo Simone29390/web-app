@@ -13,8 +13,12 @@ import {Firestore} from "../../firestore-cfg/firestore";
 export class SearchFilter implements PipeTransform {
   transform(value: any, args?: any): any {
 
-    if(!value)return null;
-    if(!args)return value;
+    if (!value) {
+      return null;
+    }
+    if (!args) {
+      return value;
+    }
 
     args = args.toLowerCase();
 
@@ -23,6 +27,27 @@ export class SearchFilter implements PipeTransform {
     });
   }
 }
+
+
+@Pipe({
+  name: 'sort'
+})
+export class ArraySortPipe implements PipeTransform {
+  transform(array: Array<any>): Array<string> {
+    array.sort((a: any, b: any) => {
+      if (a.timemillis < b.timemillis) {
+        return -1;
+      } else if (a.timemillis > b.timemillis) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    return array;
+  }
+}
+
+
 
 @Component({
   selector: 'app-showcase',
@@ -67,7 +92,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
 
     if (screenWidth <= 768) {
       this.numCol = 2;
-      this.rowHeight = '180px';
+      this.rowHeight = '210px';
       this.mobile = true;
     } else {
       this.numCol = 3;
@@ -145,6 +170,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
             category      : snapshot.child('category').val(),
             title         : snapshot.child('title').val(),
             description   : snapshot.child('description').val(),
+            timemillis   : snapshot.child('timemillis').val(),
             image1         : snapshot.child('images').child('image1').val(),
             image3         : snapshot.child('images').child('image2').val(),
             image4         : snapshot.child('images').child('image3').val(),
@@ -155,7 +181,18 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
         }
       });
 
-      self.insertions = obj;
+      self.insertions = obj.sort((obj1, obj2) => {
+        if (obj1.timemillis > obj2.timemillis) {
+          return -1;
+        }
+
+        if (obj1.timemillis < obj2.timemillis) {
+          return 1;
+        }
+
+        return 0;
+      });
+
       self.haNoItems = (self.insertions.length <= 0);
 
       self.completed = true;

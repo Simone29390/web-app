@@ -38,7 +38,7 @@ export class ShowcaseWonComponent implements OnInit {
 
     if (screenWidth <= 768) {
       this.numCol = 2;
-      this.rowHeight = '180px';
+      this.rowHeight = '210px';
       this.mobile = true;
     } else {
       this.numCol = 4;
@@ -51,8 +51,10 @@ export class ShowcaseWonComponent implements OnInit {
     let self = this;
 
     this.fb.auth().onAuthStateChanged( function( user ) {
-      self.user = user;
-      self.combineInsetions();
+      if ( Boolean( user ) && user != null) {
+          self.user = user;
+          self.combineInsetions();
+      }
     });
   }
 

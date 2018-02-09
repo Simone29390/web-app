@@ -81,8 +81,8 @@ mat-chip {
 
   mat-card {
     display: inline-block;
-    width: 200px;
-    height: 150px;
+    width: 90%;
+    height: 90%;
     margin: 5px;
     vertical-align: top;
     cursor: pointer;
@@ -92,7 +92,7 @@ mat-chip {
   .mat-card-image {
     margin: 5px;
     object-fit: cover;
-    width:90%;
-    height:90px;
+    width:80%;
+    height:80%;
   }
 }

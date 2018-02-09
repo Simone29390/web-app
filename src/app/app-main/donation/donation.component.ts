@@ -22,6 +22,7 @@ export class DonationComponent implements OnInit {
   key;
   isMobile;
   tooLow;
+  title;
 
   constructor( private dialogRef: MatDialogRef<DonationComponent>, public snackBar: MatSnackBar) {
     this.checked = false;
@@ -82,7 +83,8 @@ export class DonationComponent implements OnInit {
         value: this.getEurValue(this.price),
         key: this.key,
         userkey: this.userkey,
-        state: 'no'
+        state: 'no',
+        title: this.title
       }
     ).then((snap) => {
         self.close();

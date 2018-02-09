@@ -48,11 +48,11 @@ export class HistoryDonationService {
           self.donations.push({
             datetime           : snapshot.child('datetime').val(),
             value              : snapshot.child('value').val(),
+            title              : snapshot.child('title').val(),
             key                : snapshot.child('key').val(),
           });
-
         });
-        resolve({success: true, docRef: self.donations})
+        resolve({success: true, docRef: self.donations});
 
       }).catch(function (error) {
         reject({success: false, error: error});

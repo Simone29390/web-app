@@ -185,6 +185,7 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
     dialogRef.componentInstance.auctionHigherBidToCompare = this.auctionHigherBidToCompare;
     dialogRef.componentInstance.key = this.key;
     dialogRef.componentInstance.userkey = this.userkey;
+    dialogRef.componentInstance.title = this.title;
 
     dialogRef.afterClosed().subscribe(result => {
       //console.log( 'The dialog was closed' );

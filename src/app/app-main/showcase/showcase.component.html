@@ -20,7 +20,7 @@
 
 <mat-grid-list [cols]="numCol"  [rowHeight]=rowHeight *ngIf="completed && !haNoItems">
 
-  <mat-grid-tile *ngFor="let insertion of (insertions | searchFilter: search.value )">
+  <mat-grid-tile *ngFor="let insertion of (insertions | searchFilter: search.value)">
 
     <app-item [insertion]="insertion"></app-item>
   </mat-grid-tile>
