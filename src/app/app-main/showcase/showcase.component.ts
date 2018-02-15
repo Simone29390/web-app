@@ -1,4 +1,4 @@
-import {Component, Injectable, NgModule, OnDestroy, OnInit} from '@angular/core';
+import {Component, Injectable, Input, NgModule, OnDestroy, OnInit} from '@angular/core';
 import * as firebase from "firebase";
 import Query = firebase.database.Query;
 import {FirebaseQM} from "../../firestore-cfg/firebaseQueryManager";
@@ -71,6 +71,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   private user: firebase.User;
   isLogged: boolean;
   isValidated = true;
+  @Input() mode: string;
 
   constructor( public showcaseService: ShowcaseService ) {
     this.qm = new FirebaseQM();
@@ -166,8 +167,20 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
       querySnapshot.forEach(function (snapshot) {
 
         let cat =  snapshot.child('category').val() ;
+        let timeStart = snapshot.child('timeStart').val();
+        let start = new Date(timeStart);
+        let timeToEnd = snapshot.child('timeToEnd').val();
+        let end = new Date(timeToEnd);
+        let now = new Date();
+        let filterMode = true;
 
-        if (disabled || checked[cat - 1]) {
+        if (self.mode == 'lastest') {
+          filterMode = (end.getDay() == now.getDay());
+        } else if (self.mode == 'newest') {
+          filterMode = (start.getDay() == now.getDay());
+        }
+
+        if ((disabled || checked[cat - 1]) && filterMode) {
 
           obj.push({
             key           : snapshot.child('key').val(),
@@ -176,6 +189,8 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
             title         : snapshot.child('title').val(),
             description   : snapshot.child('description').val(),
             timemillis    : snapshot.child('timemillis').val(),
+            timeStart     : snapshot.child('timeStart').val(),
+            timeToEnd     : snapshot.child('timeToEnd').val(),
             image1        : snapshot.child('images').child('image1').val(),
             image3        : snapshot.child('images').child('image2').val(),
             image4        : snapshot.child('images').child('image3').val(),

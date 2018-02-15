@@ -54,6 +54,7 @@ import { ProfileViewComponent } from './app-main/profile-view/profile-view.compo
 import { NavBarComponent } from './app-main/nav-bar/nav-bar.component';
 import { ContainerViewComponent } from './app-main/container-view/container-view.component';
 import { InformationAccountRequiredComponent } from './app-main/information-account-required/information-account-required.component';
+import { EditProfileComponent } from './app-main/edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import { InformationAccountRequiredComponent } from './app-main/information-acco
     ProfileViewComponent,
     NavBarComponent,
     ContainerViewComponent,
-    InformationAccountRequiredComponent
+    InformationAccountRequiredComponent,
+    EditProfileComponent
   ],
   imports: [
     RoutingModule,
@@ -96,7 +98,7 @@ import { InformationAccountRequiredComponent } from './app-main/information-acco
       apiKey: 'AIzaSyCt__SEyx4mW-r0n8neNFVj0lQN0LWBCdc'
     })
   ],
-  entryComponents: [ RegistrationDialogComponent, RegistrationStepperComponent, DonationComponent],
+  entryComponents: [ RegistrationDialogComponent, RegistrationStepperComponent, DonationComponent, EditProfileComponent],
   providers: [
     AngularFireDatabaseProvider,
     EventEmitterService,

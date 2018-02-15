@@ -9,6 +9,7 @@ import {InsertionDetailsComponent} from "../app-main/insertion-details/insertion
 import {NotFoundComponent} from "../not-found/not-found.component";
 import {FavoriteViewComponent} from "../app-main/main-view/favorite-view.component";
 import {DonationViewComponent} from "../app-main/main-view/donation-view.component";
+import {EditProfileComponent} from "../app-main/edit-profile/edit-profile.component";
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'donation/:id',
     component: DonationViewComponent,
+  },
+  {
+    path: 'edit_profile',
+    component: EditProfileComponent,
   },
   {
     path: '**', component: NotFoundComponent

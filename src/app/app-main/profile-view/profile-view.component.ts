@@ -7,6 +7,7 @@ import {MatDialog} from "@angular/material";
 import {RegistrationDialogComponent} from "../../registration-dialog/registration-dialog.component";
 import {RegistrationStepperComponent} from "../../registration-stepper/registration-stepper.component";
 import {SidenavService} from "../side-menu/sidenave-service";
+import {EditProfileComponent} from "../edit-profile/edit-profile.component";
 
 @Component({
   selector: 'app-profile-view',
@@ -118,6 +119,21 @@ export class ProfileViewComponent implements OnInit {
   public toggleSidenav(): void {
     this.sidenav.toggle();
     //this.sidenav1.toggle();
+  }
+
+
+  public openDialogUpdate(): void {
+
+    this.toggleSidenav();
+
+    let dialogRef = this.dialog.open( EditProfileComponent, {
+      height: !this.isMobile ? '90%' : '70%',
+      width: !this.isMobile ? '30%' : '100%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log( 'The dialog was closed' );
+    });
   }
 
 }

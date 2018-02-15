@@ -48,6 +48,20 @@ export class MainViewComponent implements OnInit, OnDestroy {
     if (this.isMobile) {
       this.sidenavService.setSidenav( this.sidenav );
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
 
   ngOnDestroy() {

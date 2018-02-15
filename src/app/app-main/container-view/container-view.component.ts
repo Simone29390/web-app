@@ -12,6 +12,9 @@ export class ContainerViewComponent implements OnInit, OnDestroy {
   @Input() public viewPage: string;
   subscription: Subscription;
   selectedTab;
+  ALL = 'all';
+  NEWEST = 'newest';
+  LASTEST = 'lastest'
 
   constructor( private activatedRoute: ActivatedRoute, private router: Router ) { }
 
@@ -32,8 +35,10 @@ export class ContainerViewComponent implements OnInit, OnDestroy {
   onLinkClick(event: MatTabChangeEvent) {
 
     let index = event.index+1;
-    console.log('donation/'+index)
-    this.router.navigate(['donation/'+index]);
+    if (this.viewPage == 'donation') {
+      this.router.navigate(['donation/' + index]);
+    }
+
   }
 
   ngOnDestroy() {

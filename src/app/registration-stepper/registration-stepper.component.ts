@@ -120,9 +120,9 @@ export class RegistrationStepperComponent implements OnInit {
   }
 
   public openDialog(): void {
-    let dialogRef = this.dialog.open( RegistrationDialogComponent, {
+      let dialogRef = this.dialog.open( RegistrationDialogComponent, {
 
-    });
+      });
 
     dialogRef.afterClosed().subscribe(result => {
       //console.log( 'The dialog was closed' );
@@ -130,7 +130,7 @@ export class RegistrationStepperComponent implements OnInit {
   }
 
   public close() {
-    this.dialogRef.close();
+      this.dialogRef.close();
   }
 
   openSnackBar(message: string, action: string) {

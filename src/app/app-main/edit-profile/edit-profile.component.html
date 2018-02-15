@@ -1,13 +1,13 @@
 <mat-horizontal-stepper class="registration-stepper" [linear]="isLinear" (selectionChange)="register($event)">
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Informazioni aggiuntive richieste</ng-template>
+      <ng-template matStepLabel>Inserisci i tuoi dati</ng-template>
 
       <div class="form-2-col-g-xs">
         <mat-form-field class="form-input-lt">
-          <input matInput placeholder="Nome e Cognome" formControlName="name" required>
+          <input matInput placeholder="Nome" formControlName="name" required>
           <mat-error>
-            Nome Cognome <strong>Campo obbligatorio</strong>
+            Nome e Cognome <strong>Campo obbligatorio</strong>
           </mat-error>
         </mat-form-field>
       </div>
@@ -39,11 +39,11 @@
     <ng-template matStepLabel>Fatto</ng-template>
 
     <div *ngIf="!isError">
-      <h3>Attendi...</h3>
+      <h3>Aggiornamento in corso...</h3>
 
       <mat-spinner></mat-spinner>
 
-      <h4>Al termine dell'operazione, invieremo una mail di convalida al tuo indirizzo.</h4>
+      <h4>la finestra si chiuderà al termine dell'operazione.</h4>
     </div>
 
     <div *ngIf="isError">

@@ -12,6 +12,8 @@ import * as firebase from "firebase";
 import {FirestoreUsers} from "../firestore-cfg/firestore.users";
 import {SidenavService} from "../app-main/side-menu/sidenave-service";
 import {CategoryPanelService} from "../app-main/category-panel/category-panel-service";
+import {FirebaseQM} from "../firestore-cfg/firebaseQueryManager";
+import Query = firebase.database.Query;
 
 @Component({
   selector: 'app-toolbar',
@@ -64,8 +66,11 @@ export class ToolbarComponent implements OnInit  {
     let self = this;
 
     this.fb.auth().onAuthStateChanged( function( user ) {
-        self.logged = Boolean( user );
+      self.logged = Boolean( user );
 
+      if ( Boolean( user ) && user != null) {
+        self.checkUserProfile(user);
+      }
         // Refresh view
         Utils.refreshView();
     });
@@ -99,5 +104,38 @@ export class ToolbarComponent implements OnInit  {
     dialogRef.afterClosed().subscribe(result => {
       //console.log( 'The dialog was closed' );
     });
+  }
+
+
+  checkUserProfile(user: firebase.User) {
+    let queryManager: FirebaseQM = new FirebaseQM();
+
+    const ref = queryManager.getReference( 'User' );
+
+    const query: Query = ref.child( user.uid );
+
+    query.once('value').then(function (querySnapshot) {
+
+      if (querySnapshot.exists()) {
+
+        console.log(querySnapshot)
+      } else  {
+        ref.child( user.uid ).set(
+          {
+            name: user.displayName,
+            level: 'user',
+            email: user.email,
+            phone: user.phoneNumber,
+            address: '',
+            userkey: user.uid
+          }
+        ).then((snap) => {
+          console.log('success')
+        }).catch(function (error) {
+          console.log('error')
+        });
+      }
+    });
+
   }
 }

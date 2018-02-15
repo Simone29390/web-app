@@ -31,4 +31,24 @@
 
 <app-showcase-favorite *ngIf="viewPage == 'favorite'"></app-showcase-favorite>
 
-<app-showcase  *ngIf="viewPage == 'home'"></app-showcase>
+<mat-tab-group
+  class="demo-tab-group"
+  *ngIf="viewPage == 'home'"
+  [selectedIndex]="selectedTab"
+  (selectedTabChange)="onLinkClick($event)">
+  <mat-tab label="Attive">
+    <div class="demo-tab-content">
+      <app-showcase [mode]="ALL"></app-showcase>
+    </div>
+  </mat-tab>
+  <mat-tab label="In Scadenza">
+    <div class="demo-tab-content">
+      <app-showcase [mode]="LASTEST"></app-showcase>
+    </div>
+  </mat-tab>
+  <mat-tab label="Ultimi Arrivi">
+    <div class="demo-tab-content">
+      <app-showcase [mode]="NEWEST"></app-showcase>
+    </div>
+  </mat-tab>
+</mat-tab-group>
