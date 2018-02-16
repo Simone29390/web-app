@@ -53,4 +53,8 @@
 @media only screen and (max-width: 1024px) {
   .search {border-radius: 100px; padding: 3px; margin-top: 20px}
   mat-grid-list { margin-top: 2px}
+
+  .warning .mat-raised-button {
+    width: 100%;
+  }
 }
