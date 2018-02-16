@@ -2,6 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs/Subscription";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatTabChangeEvent} from "@angular/material";
+import {ContainerViewService} from "./container-view.service";
 
 @Component({
   selector: 'app-container-view',
@@ -14,9 +15,21 @@ export class ContainerViewComponent implements OnInit, OnDestroy {
   selectedTab;
   ALL = 'all';
   NEWEST = 'newest';
-  LASTEST = 'lastest'
+  LASTEST = 'lastest';
+  _donationActive: Subscription;
+  _donationExpired: Subscription;
+  _donationWon: Subscription;
+  _insertion: Subscription;
+  _newestInsertion: Subscription;
+  _lastestInsertion: Subscription;
+  numbOfDonationActive;
+  numbOfDonationExpired;
+  numbOfDonationWon;
+  numbOfInsertion;
+  numbOfNewestInsertion;
+  numbOfLastestInsertion;
 
-  constructor( private activatedRoute: ActivatedRoute, private router: Router ) { }
+  constructor( private activatedRoute: ActivatedRoute, private router: Router, private containerViewService: ContainerViewService) { }
 
   ngOnInit() {
     let self = this;
@@ -24,6 +37,26 @@ export class ContainerViewComponent implements OnInit, OnDestroy {
     self.subscription = self.activatedRoute.paramMap.subscribe(params => {
       let id = params.get('id');
       self.changeTab(id);
+    });
+
+
+    this._donationActive = this.containerViewService.numbOfDonationActive.subscribe((value) => {
+      this.numbOfDonationActive = value;
+    });
+    this._donationExpired = this.containerViewService.numbOfDonationExpired.subscribe((value) => {
+      this.numbOfDonationExpired = value;
+    });
+    this._donationWon = this.containerViewService.numbOfDonationWon.subscribe((value) => {
+      this.numbOfDonationWon = value;
+    });
+    this._insertion = this.containerViewService.numbOfInsertion.subscribe((value) => {
+      this.numbOfInsertion = value;
+    });
+    this._newestInsertion = this.containerViewService.numbOfNewestInsertion.subscribe((value) => {
+      this.numbOfNewestInsertion = value;
+    });
+    this._lastestInsertion = this.containerViewService.numbOfLastestInsertion.subscribe((value) => {
+      this.numbOfLastestInsertion = value;
     });
   }
 
@@ -44,6 +77,12 @@ export class ContainerViewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // prevent memory leak when component is destroyed
     this.subscription.unsubscribe();
+    this._donationActive.unsubscribe();
+    this._donationExpired.unsubscribe();
+    this._donationWon.unsubscribe();
+    this._insertion.unsubscribe();
+    this._newestInsertion.unsubscribe();
+    this._lastestInsertion.unsubscribe();
   }
 
 }

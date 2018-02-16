@@ -80,7 +80,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
       this.mobile = true;
 
       if (screenWidth < 768) {
-        this.rowHeight = '210px';
+        this.rowHeight = '190px';
       }
 
     } else {
@@ -107,8 +107,6 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
         self.isValidated = true;
       }
     });
-
-
 
     this._subscription = this.showcaseService.filter.subscribe((value) => {
       this.filter = value;
@@ -149,7 +147,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
 
       querySnapshot.forEach(function (snapshot) {
 
-        let cat =  snapshot.child('category').val() ;
+        let cat =  snapshot.child('category').val();
         let timeStart = snapshot.child('timeStart').val();
         let start = new Date(timeStart);
         let timeToEnd = snapshot.child('timeToEnd').val();
@@ -157,9 +155,9 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
         let now = new Date();
 
         let filterMode = true;
-        if (self.mode == 'lastest') {
+        if (self.mode === 'lastest') {
           filterMode = (end.getDate() - now.getDate() <= 2) && (end.getMonth() === now.getMonth());
-        } else if (self.mode == 'newest') {
+        } else if (self.mode === 'newest') {
           filterMode = (now.getDate() - start.getDate() <= 2) && (start.getMonth() === now.getMonth());
         }
 
@@ -199,9 +197,9 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
       self.haNoItems = (self.insertions.length <= 0);
 
       // set number of insertion to service tab view
-      if (self.mode == 'lastest') {
+      if (self.mode === 'lastest') {
         self.containerViewService.setNumbOfLastestInsertion(self.insertions.length);
-      } else if (self.mode == 'newest') {
+      } else if (self.mode === 'newest') {
         self.containerViewService.setNumbOfNewestInsertion(self.insertions.length);
       } else {
         self.containerViewService.setNumbOfInsertion(self.insertions.length);

@@ -4,16 +4,25 @@
   [selectedIndex]="selectedTab"
   (selectedTabChange)="onLinkClick($event)">
   <mat-tab label="Attive">
+    <ng-template mat-tab-label>
+      Attive ({{numbOfDonationActive}})
+    </ng-template>
     <div class="demo-tab-content">
       <app-showcase-active></app-showcase-active>
     </div>
   </mat-tab>
   <mat-tab label="Scadute">
+    <ng-template mat-tab-label>
+      Scadute ({{numbOfDonationExpired}})
+    </ng-template>
     <div class="demo-tab-content">
       <app-showcase-expired></app-showcase-expired>
     </div>
   </mat-tab>
   <mat-tab label="Aggiudicate">
+    <ng-template mat-tab-label>
+      Aggiudicate ({{numbOfDonationWon}})
+    </ng-template>
     <div class="demo-tab-content">
       <app-showcase-won></app-showcase-won>
     </div>
@@ -37,16 +46,28 @@
   [selectedIndex]="selectedTab"
   (selectedTabChange)="onLinkClick($event)">
   <mat-tab label="Attive">
+    <ng-template mat-tab-label>
+      <mat-icon>dashboard</mat-icon>
+      Attive ({{numbOfInsertion}})
+    </ng-template>
     <div class="demo-tab-content">
       <app-showcase [mode]="ALL"></app-showcase>
     </div>
   </mat-tab>
   <mat-tab label="In Scadenza">
+    <ng-template mat-tab-label>
+      <mat-icon>new_releases</mat-icon>
+      In Scadenza ({{numbOfLastestInsertion}})
+    </ng-template>
     <div class="demo-tab-content">
       <app-showcase [mode]="LASTEST"></app-showcase>
     </div>
   </mat-tab>
   <mat-tab label="Ultimi Arrivi">
+    <ng-template mat-tab-label>
+      <mat-icon>fiber_new</mat-icon>
+      Ultimi Arrivi ({{numbOfNewestInsertion}})
+    </ng-template>
     <div class="demo-tab-content">
       <app-showcase [mode]="NEWEST"></app-showcase>
     </div>

@@ -1,38 +1,24 @@
-import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
+import {Component, Injectable, NgModule, OnDestroy, OnInit, Pipe, PipeTransform} from '@angular/core';
 import * as firebase from "firebase";
 import Query = firebase.database.Query;
 import {FirebaseQM} from "../../firestore-cfg/firebaseQueryManager";
 import {Firestore} from "../../firestore-cfg/firestore";
 import {ContainerViewService} from "../container-view/container-view.service";
-
-@Pipe({
-  name: 'searchFilter'
-})
-export class SearchFilter implements PipeTransform {
-  transform(value: any, args?: any): any {
-
-    if (!value) {
-      return null;
-    }
-    if (!args) {
-      return value;
-    }
-
-    args = args.toLowerCase();
-
-    return value.filter(function(item){
-      return JSON.stringify(item).toLowerCase().includes(args);
-    });
-  }
-}
+import {ShowcaseService} from "./showcase-service";
+import { Subscription } from 'rxjs/Rx';
+import {SearchFilter} from "./showcase.component";
 
 
+
+@NgModule({
+  declarations: [SearchFilter]})
 @Component({
   selector: 'app-showcase-favorite',
   templateUrl: './showcase.component.html',
   styleUrls: ['./showcase.component.css']
 })
-export class ShowcaseFavoriteComponent implements OnInit {
+@Injectable()
+export class ShowcaseFavoriteComponent implements OnInit, OnDestroy {
   private fs: Firestore;
   private filter: object;
   private qm: FirebaseQM;
@@ -45,13 +31,18 @@ export class ShowcaseFavoriteComponent implements OnInit {
   rowHeight;
   mobile;
   isValidated = true;
+  _subscription: Subscription;
 
-  constructor( public containerViewService: ContainerViewService ) {
+  constructor( public containerViewService: ContainerViewService, public showcaseService: ShowcaseService ) {
     this.fs = new Firestore();
     this.fb = this.fs.getConfiguredFirebase();
     this.qm = new FirebaseQM();
 
     this.completed = false;
+
+    this.showcaseService.set(
+      {checked: [], disabled: true}
+    );
 
     // User screen size
     const screenHeight = window.screen.height;
@@ -63,7 +54,7 @@ export class ShowcaseFavoriteComponent implements OnInit {
       this.mobile = true;
 
       if (screenWidth < 768) {
-        this.rowHeight = '210px';
+        this.rowHeight = '190px';
       }
 
     } else {
@@ -71,6 +62,15 @@ export class ShowcaseFavoriteComponent implements OnInit {
       this.rowHeight = '270px';
       this.mobile = false;
     }
+
+    this._subscription = this.showcaseService.filter.subscribe((value) => {
+      this.filter = value;
+      if (this.user) {
+        this.combineInsetions();
+      }
+    });
+
+    console.log(this._subscription)
   }
 
   ngOnInit() {
@@ -82,6 +82,8 @@ export class ShowcaseFavoriteComponent implements OnInit {
         self.combineInsetions();
       }
     });
+
+
   }
 
 
@@ -97,6 +99,9 @@ export class ShowcaseFavoriteComponent implements OnInit {
     const ref = this.qm.getReference( 'Favorite' );
     const groupRef = this.qm.getReference( 'Insertion' );
 
+    const disabled = self.filter['disabled'];
+    const checked = self.filter['checked'];
+
     let query: Query = ref.child(self.user['uid']);
 
     query.once('value').then(function (querySnapshot) {
@@ -108,19 +113,23 @@ export class ShowcaseFavoriteComponent implements OnInit {
         let key = snapshot.child('key').val();
         groupRef.child(key).once('value').then(function ( snapshot1 ) {
 
-          self.insertions.push({
-            key           : snapshot1.child('key').val(),
-            datetime      : snapshot1.child('datetime').val(),
-            category      : snapshot1.child('category').val(),
-            title         : snapshot1.child('title').val(),
-            description   : snapshot1.child('description').val(),
-            image1         : snapshot1.child('images').child('image1').val(),
-            image3         : snapshot1.child('images').child('image2').val(),
-            image4         : snapshot1.child('images').child('image3').val(),
-            image5         : snapshot1.child('images').child('image4').val(),
-            image6         : snapshot1.child('images').child('image5').val(),
-            image7         : snapshot1.child('images').child('image6').val(),
-          });
+          let cat =  snapshot1.child('category').val();
+
+          if (disabled || checked[cat - 1]) {
+            self.insertions.push({
+              key: snapshot1.child('key').val(),
+              datetime: snapshot1.child('datetime').val(),
+              category: snapshot1.child('category').val(),
+              title: snapshot1.child('title').val(),
+              description: snapshot1.child('description').val(),
+              image1: snapshot1.child('images').child('image1').val(),
+              image3: snapshot1.child('images').child('image2').val(),
+              image4: snapshot1.child('images').child('image3').val(),
+              image5: snapshot1.child('images').child('image4').val(),
+              image6: snapshot1.child('images').child('image5').val(),
+              image7: snapshot1.child('images').child('image6').val(),
+            });
+          }
         });
 
         self.haNoItems = false;
@@ -134,4 +143,7 @@ export class ShowcaseFavoriteComponent implements OnInit {
     this.user.sendEmailVerification();
   }
 
+  ngOnDestroy() {
+    this._subscription.unsubscribe();
+  }
 }

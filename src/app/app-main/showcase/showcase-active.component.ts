@@ -1,39 +1,25 @@
-import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
+import {Component, Injectable, NgModule, OnDestroy, OnInit, Pipe, PipeTransform} from '@angular/core';
 import * as firebase from "firebase";
 import Query = firebase.database.Query;
 import {FirebaseQM} from "../../firestore-cfg/firebaseQueryManager";
 import {Firestore} from "../../firestore-cfg/firestore";
 import * as _ from 'lodash';
 import {ContainerViewService} from "../container-view/container-view.service";
+import {ShowcaseService} from "./showcase-service";
+import { Subscription } from 'rxjs/Rx';
+import {SearchFilter} from "./showcase.component";
 
-@Pipe({
-  name: 'searchFilter'
-})
-export class SearchFilter implements PipeTransform {
-  transform(value: any, args?: any): any {
 
-    if (!value) {
-      return null;
-    }
-    if (!args) {
-      return value;
-    }
-
-    args = args.toLowerCase();
-
-    return value.filter(function(item){
-      return JSON.stringify(item).toLowerCase().includes(args);
-    });
-  }
-}
-
+@NgModule({
+  declarations: [SearchFilter]})
 
 @Component({
   selector: 'app-showcase-active',
   templateUrl: './showcase.component.html',
   styleUrls: ['./showcase.component.css']
 })
-export class ShowcaseActiveComponent implements OnInit {
+@Injectable()
+export class ShowcaseActiveComponent implements OnInit, OnDestroy {
   private fs: Firestore;
   private filter: object;
   private qm: FirebaseQM;
@@ -46,14 +32,18 @@ export class ShowcaseActiveComponent implements OnInit {
   rowHeight;
   mobile;
   isValidated = true;
+  _subscription: Subscription;
 
-  constructor( public containerViewService: ContainerViewService ) {
+  constructor( public containerViewService: ContainerViewService , public showcaseService: ShowcaseService) {
     this.fs = new Firestore();
     this.fb = this.fs.getConfiguredFirebase();
     this.qm = new FirebaseQM();
 
     this.completed = false;
 
+    this.showcaseService.set(
+      {checked: [], disabled: true}
+    );
 
     // User screen size
     const screenHeight = window.screen.height;
@@ -65,13 +55,22 @@ export class ShowcaseActiveComponent implements OnInit {
       this.mobile = true;
 
       if (screenWidth < 768) {
-        this.rowHeight = '210px';
+        this.rowHeight = '190px';
       }
     } else {
       this.numCol = 4;
       this.rowHeight = '270px';
       this.mobile = false;
     }
+
+    this._subscription = this.showcaseService.filter.subscribe((value) => {
+      console.log(value)
+      this.filter = value;
+
+      if (this.user) {
+        this.combineInsetions();
+      }
+    });
   }
 
   ngOnInit() {
@@ -83,12 +82,16 @@ export class ShowcaseActiveComponent implements OnInit {
         self.combineInsetions();
       }
     });
+
+
   }
 
 
   public combineInsetions() {
 
     const self = this;
+
+    console.log(self.insertions)
 
     // Init view
     self.insertions = [];
@@ -97,6 +100,9 @@ export class ShowcaseActiveComponent implements OnInit {
 
     const ref = this.qm.getReference( 'Donation' );
     const groupRef = this.qm.getReference( 'Insertion' );
+
+    const disabled = self.filter['disabled'];
+    const checked = self.filter['checked'];
 
     let query: Query = ref
       .orderByChild( 'userkey')
@@ -115,8 +121,9 @@ export class ShowcaseActiveComponent implements OnInit {
           .then(function ( snapshot1 ) {
 
             const state = snapshot1.child('state').val();
+            let cat =  snapshot1.child('category').val();
 
-            if (state === 'published') {
+            if ((disabled || checked[cat - 1]) && state === 'published') {
 
               self.insertions.push({
                 key           : snapshot1.child('key').val(),
@@ -152,5 +159,8 @@ export class ShowcaseActiveComponent implements OnInit {
     this.user.sendEmailVerification();
   }
 
+  ngOnDestroy() {
+    this._subscription.unsubscribe();
+  }
 
 }

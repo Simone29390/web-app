@@ -1,33 +1,16 @@
 
-import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
+import {Component, Injectable, NgModule, OnDestroy, OnInit, Pipe, PipeTransform} from '@angular/core';
 import * as firebase from "firebase";
 import Query = firebase.database.Query;
 import {FirebaseQM} from "../../firestore-cfg/firebaseQueryManager";
 import {Firestore} from "../../firestore-cfg/firestore";
 import * as _ from 'lodash';
 import {ContainerViewService} from "../container-view/container-view.service";
+import {ShowcaseService} from "./showcase-service";
+import { Subscription } from 'rxjs/Rx';
+import {SearchFilter} from "./showcase.component";
 
 
-@Pipe({
-  name: 'searchFilter'
-})
-export class SearchFilter implements PipeTransform {
-  transform(value: any, args?: any): any {
-
-    if (!value) {
-      return null;
-    }
-    if (!args) {
-      return value;
-    }
-
-    args = args.toLowerCase();
-
-    return value.filter(function(item){
-      return JSON.stringify(item).toLowerCase().includes(args);
-    });
-  }
-}
 
 
 @Component({
@@ -35,7 +18,8 @@ export class SearchFilter implements PipeTransform {
   templateUrl: './showcase.component.html',
   styleUrls: ['./showcase.component.css']
 })
-export class ShowcaseWonComponent implements OnInit {
+@Injectable()
+export class ShowcaseWonComponent implements OnInit, OnDestroy {
   private fs: Firestore;
   private filter: object;
   private qm: FirebaseQM;
@@ -48,13 +32,19 @@ export class ShowcaseWonComponent implements OnInit {
   rowHeight;
   mobile;
   isValidated = true;
+  _subscription: Subscription;
 
-  constructor( public containerViewService: ContainerViewService ) {
+  constructor( public containerViewService: ContainerViewService, public showcaseService: ShowcaseService ) {
     this.fs = new Firestore();
     this.fb = this.fs.getConfiguredFirebase();
     this.qm = new FirebaseQM();
 
     this.completed = false;
+
+
+    this.showcaseService.set(
+      {checked: [], disabled: true}
+    );
 
     // User screen size
     const screenHeight = window.screen.height;
@@ -66,7 +56,7 @@ export class ShowcaseWonComponent implements OnInit {
       this.mobile = true;
 
       if (screenWidth < 768) {
-        this.rowHeight = '210px';
+        this.rowHeight = '190px';
       }
 
     } else {
@@ -74,6 +64,15 @@ export class ShowcaseWonComponent implements OnInit {
       this.rowHeight = '270px';
       this.mobile = false;
     }
+
+    this._subscription = this.showcaseService.filter.subscribe((value) => {
+      console.log(value)
+      this.filter = value;
+
+      if (this.user) {
+        this.combineInsetions();
+      }
+    });
   }
 
   ngOnInit() {
@@ -85,6 +84,8 @@ export class ShowcaseWonComponent implements OnInit {
           self.combineInsetions();
       }
     });
+
+
   }
 
 
@@ -99,6 +100,9 @@ export class ShowcaseWonComponent implements OnInit {
 
     const ref = this.qm.getReference( 'Donation' );
     const groupRef = this.qm.getReference( 'Insertion' );
+
+    const disabled = self.filter['disabled'];
+    const checked = self.filter['checked'];
 
     let query: Query = ref
       .orderByChild( 'userkey')
@@ -119,7 +123,9 @@ export class ShowcaseWonComponent implements OnInit {
             const state = snapshot1.child('state').val();
             const auctionHigherBidder  = snapshot1.child('auctionHigherBidder').val();
 
-            if (state === 'expired' && auctionHigherBidder === self.user['uid']) {
+            let cat =  snapshot1.child('category').val();
+
+            if ((disabled || checked[cat - 1]) && state === 'expired' && auctionHigherBidder === self.user['uid']) {
 
               self.insertions.push({
                 key           : snapshot1.child('key').val(),
@@ -137,6 +143,8 @@ export class ShowcaseWonComponent implements OnInit {
 
               self.insertions = _.uniqBy(self.insertions, 'key');
               self.haNoItems = false;
+
+              self.containerViewService.setNumbOfDonationWon(self.insertions.length);
             }
 
             self.completed = true;
@@ -153,4 +161,7 @@ export class ShowcaseWonComponent implements OnInit {
     this.user.sendEmailVerification();
   }
 
+  ngOnDestroy() {
+    this._subscription.unsubscribe();
+  }
 }
