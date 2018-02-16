@@ -22,7 +22,7 @@
         <h2>{{ title }}</h2>
         <h4>{{ getCategoryName(category) }}</h4>
         <h5><i>{{ description }}</i></h5>
-        <h4> Scadenza {{ timeToEnd }}</h4>
+        <h4> {{ timeEndView }}</h4>
         <mat-card-actions *ngIf="!isHigherBidder">
           <button mat-raised-button="" color="warn" (click)="openDialog()">Fai un'offerta</button>
         </mat-card-actions>
@@ -67,7 +67,7 @@
 
     <h5>{{ getCategoryName(category) }}</h5>
     <h6>{{ description }}</h6>
-    <h4> Scadenza {{ timeToEnd }}</h4>
+    <h4> {{ timeEndView }}</h4>
     <mat-card-actions *ngIf="!isHigherBidder">
       <button mat-raised-button="" color="warn" (click)="openDialog()">Fai un'offerta</button>
     </mat-card-actions>

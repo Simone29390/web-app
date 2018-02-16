@@ -45,6 +45,8 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
   isLogged;
   isValidated;
 
+  timeEndView;
+
   constructor(private activatedRoute: ActivatedRoute, public dialog: MatDialog, public snackBar: MatSnackBar ) {
     this.qm = new FirebaseQM();
     this.fs = new Firestore();
@@ -135,6 +137,13 @@ export class InsertionDetailsComponent implements OnInit, OnDestroy {
       self.primaryImage = self.imagesArray[0];
 
       self.completed = true;
+
+
+      let date = new Date(self.timeToEnd).toLocaleDateString();
+      let time = new Date(self.timeToEnd).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
+      self.timeEndView = "Scade il " + date + " alle " + time;
+
     });
   }
 

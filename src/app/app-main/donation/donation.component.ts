@@ -75,11 +75,12 @@ export class DonationComponent implements OnInit {
 
     const ref = this.qm.getReference( 'Donation' );
 
+    let price = this.price * 100;
 
     ref.push().set(
       {
-        datetime: 'DEFAULT',
-        valueToCompare: this.price * 100,
+        datetime: 'DEFAULT_BY_SERVER',
+        valueToCompare: price.toString(),
         value: this.getEurValue(this.price),
         key: this.key,
         userkey: this.userkey,

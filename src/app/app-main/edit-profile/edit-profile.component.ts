@@ -49,8 +49,9 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit() {
 
-
     let self = this;
+
+    self.compilefields(StringUtils.EMPTY, StringUtils.EMPTY, StringUtils.EMPTY);
 
     this.fb.auth().onAuthStateChanged( function( user ) {
 
@@ -68,7 +69,6 @@ export class EditProfileComponent implements OnInit {
      * First block of registration module
      * @type {FormGroup}
      */
-    console.log(name + address + phone);
 
     this.firstFormGroup = this._formBuilder.group({
       name:     [ name, Validators.required ],
@@ -97,12 +97,12 @@ export class EditProfileComponent implements OnInit {
     query.once('value').then(function (querySnapshot) {
 
       if (querySnapshot.exists()) {
-        self.name = querySnapshot.child('name');
-        self.level = querySnapshot.child('level');
-        self.email = querySnapshot.child('email');
-        self.phone = querySnapshot.child('phone');
-        self.address = querySnapshot.child('address');
-        self.userkey = querySnapshot.child('userkey');
+        self.name = querySnapshot.child('name').val();
+        self.level = querySnapshot.child('level').val();
+        self.email = querySnapshot.child('email').val();
+        self.phone = querySnapshot.child('phone').val();
+        self.address = querySnapshot.child('address').val();
+        self.userkey = querySnapshot.child('userkey').val();
 
         self.compilefields(self.name, self.address, self.phone);
       } else {
@@ -126,7 +126,8 @@ export class EditProfileComponent implements OnInit {
     ref.child( user.uid ).update(
       self.fillUserProperties()
     ).then((snap) => {
-      console.log('success')
+      self.close();
+      self.openSnackBar("Il tuo profilo è stato aggiornato","Avviso");
     }).catch(function (error) {
       self.isError = true;
       self.errorCode = error;
@@ -136,5 +137,11 @@ export class EditProfileComponent implements OnInit {
 
   public close() {
     this.dialogRef.close();
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

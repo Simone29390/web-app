@@ -1,7 +1,7 @@
 <mat-horizontal-stepper class="registration-stepper" [linear]="isLinear" (selectionChange)="register($event)">
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Inserisci i tuoi dati</ng-template>
+      <ng-template matStepLabel>Aggiorna i tuoi dati</ng-template>
 
       <div class="form-2-col-g-xs">
         <mat-form-field class="form-input-lt">
@@ -30,7 +30,7 @@
 
       <div class="button">
         <button mat-raised-button (click)="close()" color="primary">Annulla</button>
-        <button class="btn-right" mat-raised-button matStepperNext color="primary">Registrati</button>
+        <button class="btn-right" mat-raised-button matStepperNext color="primary">Applica</button>
       </div>
     </form>
   </mat-step>

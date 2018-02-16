@@ -15,8 +15,9 @@ export class ItemComponent implements OnInit {
   @Input() insertion: object;
   insertionId: string;
   imagesArray = [];
-  primaryImage;
+  primaryImage = '/assets/other/blank.jpg';
   isMobile;
+  dateTime;
 
   private fs: Firestore;
   private fb: firebase.app.App;
@@ -70,6 +71,11 @@ export class ItemComponent implements OnInit {
         });
       }
     }
+
+    let date = new Date(this.insertion['timeToEnd']).toLocaleDateString();
+    let time = new Date(this.insertion['timeToEnd']).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
+    this.dateTime = "Scade il " + date + " alle " + time;
   }
 
   getCategoryName(id: string) {

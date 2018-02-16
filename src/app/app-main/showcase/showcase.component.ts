@@ -29,26 +29,6 @@ export class SearchFilter implements PipeTransform {
 }
 
 
-@Pipe({
-  name: 'sort'
-})
-export class ArraySortPipe implements PipeTransform {
-  transform(array: Array<any>): Array<string> {
-    array.sort((a: any, b: any) => {
-      if (a.timemillis < b.timemillis) {
-        return -1;
-      } else if (a.timemillis > b.timemillis) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
-    return array;
-  }
-}
-
-
-
 @Component({
   selector: 'app-showcase',
   templateUrl: './showcase.component.html',
@@ -174,10 +154,11 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
         let now = new Date();
         let filterMode = true;
 
+
         if (self.mode == 'lastest') {
-          filterMode = (end.getDay() == now.getDay());
+          filterMode = (end.getDate() - now.getDate() <= 2) && (end.getMonth() === now.getMonth());
         } else if (self.mode == 'newest') {
-          filterMode = (start.getDay() == now.getDay());
+          filterMode = (now.getDate() - start.getDate() <= 2) && (start.getMonth() === now.getMonth());
         }
 
         if ((disabled || checked[cat - 1]) && filterMode) {

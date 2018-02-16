@@ -71,6 +71,7 @@ class Firestore {
     // Create an instance of the Google provider object
     let provider = new firebase.auth.GoogleAuthProvider();
 
+
     // Sign-in in popup window
     firebase.auth().signInWithPopup( provider ).then(
       function( result ) {
@@ -79,7 +80,7 @@ class Firestore {
         if( result ) console.log( result );
 
         firebase.auth().setPersistence(
-          firebase.auth.Auth.Persistence.SESSION
+          firebase.auth.Auth.Persistence.LOCAL
         );
       }).catch( function( error ) {
       // Handle Errors here.

@@ -54,10 +54,16 @@ export class RegistrationDialogComponent implements OnInit {
     let email = this.FormGroup.controls[ 'email' ].value,
       password = this.FormGroup.controls[ 'password' ].value;
 
+
     this.fs.getConfiguredFirebase()
       .auth()
       .signInWithEmailAndPassword( email, password )
       .then( function ( success ) {
+
+        firebase.auth().setPersistence(
+          firebase.auth.Auth.Persistence.LOCAL
+        );
+
         self.logged();
       })
       .catch(function( error ) {
