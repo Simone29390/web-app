@@ -24,7 +24,7 @@ export class DonationComponent implements OnInit {
   tooLow;
   title;
 
-  constructor( private dialogRef: MatDialogRef<DonationComponent>, public snackBar: MatSnackBar) {
+  constructor( private dialogRef: MatDialogRef<DonationComponent>, public snackBar: MatSnackBar ) {
     this.checked = false;
     this.price = '';
     this.qm = new FirebaseQM();

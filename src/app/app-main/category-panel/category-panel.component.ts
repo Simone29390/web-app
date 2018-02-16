@@ -5,6 +5,11 @@ import {CategoryPanelService} from "./category-panel-service";
 import {ShowcaseComponent} from "../showcase/showcase.component";
 import {ShowcaseService} from "../showcase/showcase-service";
 
+export interface DatePickerFilter {
+  dateStart: Date,
+  dateEnd: Date
+}
+
 @Component({
   selector: 'app-category-panel',
   templateUrl: './category-panel.component.html',
@@ -17,6 +22,12 @@ export class CategoryPanelComponent implements OnInit {
   indeterminate = false;
   align = 'start';
   disabled = false;
+  dateFilter = {
+    dateStart: "none",
+    dateEnd: "none"
+  };
+
+
 
   public opened: boolean;
 

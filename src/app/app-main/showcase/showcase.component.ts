@@ -6,6 +6,7 @@ import { Pipe, PipeTransform} from '@angular/core';
 import {ShowcaseService} from "./showcase-service";
 import { Subscription } from 'rxjs/Rx';
 import {Firestore} from "../../firestore-cfg/firestore";
+import {ContainerViewService} from "../container-view/container-view.service";
 
 @Pipe({
   name: 'searchFilter'
@@ -53,7 +54,9 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   isValidated = true;
   @Input() mode: string;
 
-  constructor( public showcaseService: ShowcaseService ) {
+  constructor( public showcaseService: ShowcaseService,
+               public containerViewService: ContainerViewService) {
+
     this.qm = new FirebaseQM();
     this.fs = new Firestore();
     this.fb = this.fs.getConfiguredFirebase();
@@ -152,9 +155,8 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
         let timeToEnd = snapshot.child('timeToEnd').val();
         let end = new Date(timeToEnd);
         let now = new Date();
+
         let filterMode = true;
-
-
         if (self.mode == 'lastest') {
           filterMode = (end.getDate() - now.getDate() <= 2) && (end.getMonth() === now.getMonth());
         } else if (self.mode == 'newest') {
@@ -195,6 +197,15 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
       });
 
       self.haNoItems = (self.insertions.length <= 0);
+
+      // set number of insertion to service tab view
+      if (self.mode == 'lastest') {
+        self.containerViewService.setNumbOfLastestInsertion(self.insertions.length);
+      } else if (self.mode == 'newest') {
+        self.containerViewService.setNumbOfNewestInsertion(self.insertions.length);
+      } else {
+        self.containerViewService.setNumbOfInsertion(self.insertions.length);
+      }
 
       self.completed = true;
     }).catch(function (error) {

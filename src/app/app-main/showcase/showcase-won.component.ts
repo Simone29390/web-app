@@ -1,10 +1,34 @@
 
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
 import * as firebase from "firebase";
 import Query = firebase.database.Query;
 import {FirebaseQM} from "../../firestore-cfg/firebaseQueryManager";
 import {Firestore} from "../../firestore-cfg/firestore";
 import * as _ from 'lodash';
+import {ContainerViewService} from "../container-view/container-view.service";
+
+
+@Pipe({
+  name: 'searchFilter'
+})
+export class SearchFilter implements PipeTransform {
+  transform(value: any, args?: any): any {
+
+    if (!value) {
+      return null;
+    }
+    if (!args) {
+      return value;
+    }
+
+    args = args.toLowerCase();
+
+    return value.filter(function(item){
+      return JSON.stringify(item).toLowerCase().includes(args);
+    });
+  }
+}
+
 
 @Component({
   selector: 'app-showcase-won',
@@ -25,7 +49,7 @@ export class ShowcaseWonComponent implements OnInit {
   mobile;
   isValidated = true;
 
-  constructor(  ) {
+  constructor( public containerViewService: ContainerViewService ) {
     this.fs = new Firestore();
     this.fb = this.fs.getConfiguredFirebase();
     this.qm = new FirebaseQM();

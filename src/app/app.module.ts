@@ -55,6 +55,7 @@ import { NavBarComponent } from './app-main/nav-bar/nav-bar.component';
 import { ContainerViewComponent } from './app-main/container-view/container-view.component';
 import { InformationAccountRequiredComponent } from './app-main/information-account-required/information-account-required.component';
 import { EditProfileComponent } from './app-main/edit-profile/edit-profile.component';
+import {ContainerViewService} from "./app-main/container-view/container-view.service";
 
 
 @NgModule({
@@ -110,7 +111,8 @@ import { EditProfileComponent } from './app-main/edit-profile/edit-profile.compo
     CategoryPanelService,
     ShowcaseService,
     MainViewService,
-    HistoryDonationService
+    HistoryDonationService,
+    ContainerViewService
 
   ],
   bootstrap: [ ToolbarComponent, RouteComponent  ]
