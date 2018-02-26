@@ -3,11 +3,13 @@ import {MainViewService} from "./main-view-service";
 import {Subscription} from "rxjs/Subscription";
 import {SidenavService} from "../side-menu/sidenave-service";
 import {MatSidenav} from "@angular/material";
+import {BOOM_OUT_ANIMATION} from "../../animations/boom-out.animation";
 
 @Component({
   selector: 'app-main-view',
   templateUrl: './main-view.component.html',
-  styleUrls:['./main-view.component.css']
+  styleUrls:['./main-view.component.css'],
+  animations: [ BOOM_OUT_ANIMATION ]
 })
 
 export class MainViewComponent implements OnInit, OnDestroy {
@@ -19,6 +21,8 @@ export class MainViewComponent implements OnInit, OnDestroy {
   viewPage = 'home';
   mode;
   public opened: boolean;
+
+  state: string = 'active';
 
   constructor( private mainViewService: MainViewService, public sidenavService: SidenavService) {
     this.mainViewService.select(0);

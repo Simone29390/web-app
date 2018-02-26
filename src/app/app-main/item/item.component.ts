@@ -5,11 +5,13 @@ import * as firebase from "firebase";
 import Query = firebase.firestore.Query;
 import {Firestore} from "../../firestore-cfg/firestore";
 import {escapeRegExp} from "tslint/lib/utils";
+import {FALL_DOWN_ANIMATION} from "../../animations/fall-down.animation";
 
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
-  styleUrls: ['./item.component.css']
+  styleUrls: ['./item.component.css'],
+  animations: [ FALL_DOWN_ANIMATION ]
 })
 export class ItemComponent implements OnInit {
   @Input() insertion: object;
@@ -21,6 +23,8 @@ export class ItemComponent implements OnInit {
 
   private fs: Firestore;
   private fb: firebase.app.App;
+
+  state: string = 'active';
 
   constructor() {
     this.fs = new Firestore();

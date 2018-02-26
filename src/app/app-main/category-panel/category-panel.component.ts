@@ -4,6 +4,7 @@ import {SidenavService} from "../side-menu/sidenave-service";
 import {CategoryPanelService} from "./category-panel-service";
 import {ShowcaseComponent} from "../showcase/showcase.component";
 import {ShowcaseService} from "../showcase/showcase-service";
+import {BOOM_OUT_ANIMATION} from "../../animations/boom-out.animation";
 
 export interface DatePickerFilter {
   dateStart: Date,
@@ -13,7 +14,8 @@ export interface DatePickerFilter {
 @Component({
   selector: 'app-category-panel',
   templateUrl: './category-panel.component.html',
-  styleUrls: ['./category-panel.component.css']
+  styleUrls: ['./category-panel.component.css'],
+  animations: [ BOOM_OUT_ANIMATION ]
 })
 export class CategoryPanelComponent implements OnInit {
   @ViewChild( 'sidenav' )
@@ -27,7 +29,7 @@ export class CategoryPanelComponent implements OnInit {
     dateEnd: "none"
   };
 
-
+  state: string = 'active';
 
   public opened: boolean;
 

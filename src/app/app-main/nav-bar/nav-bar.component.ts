@@ -4,16 +4,20 @@ import * as firebase from "firebase";
 import Query = database.Query;
 import {FirebaseQM} from "../../firestore-cfg/firebaseQueryManager";
 import {database} from "firebase";
+import {FLY_IN_OUT_ANIMATION} from "../../animations/fly-in-out.animation";
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css']
+  styleUrls: ['./nav-bar.component.css'],
+  animations: [ FLY_IN_OUT_ANIMATION ]
 })
 export class NavBarComponent implements OnInit {
   isMobile = true;
   private fs: Firestore;
   private fb: firebase.app.App;
+
+  state: string = 'active';
 
   isLogged: boolean;
   isValidated: boolean;

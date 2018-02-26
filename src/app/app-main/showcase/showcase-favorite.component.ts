@@ -7,6 +7,7 @@ import {ContainerViewService} from "../container-view/container-view.service";
 import {ShowcaseService} from "./showcase-service";
 import { Subscription } from 'rxjs/Rx';
 import {SearchFilter} from "./showcase.component";
+import {BOOM_OUT_ANIMATION} from "../../animations/boom-out.animation";
 
 
 
@@ -15,7 +16,8 @@ import {SearchFilter} from "./showcase.component";
 @Component({
   selector: 'app-showcase-favorite',
   templateUrl: './showcase.component.html',
-  styleUrls: ['./showcase.component.css']
+  styleUrls: ['./showcase.component.css'],
+  animations: [ BOOM_OUT_ANIMATION ]
 })
 @Injectable()
 export class ShowcaseFavoriteComponent implements OnInit, OnDestroy {
@@ -32,7 +34,7 @@ export class ShowcaseFavoriteComponent implements OnInit, OnDestroy {
   mobile;
   isValidated = true;
   _subscription: Subscription;
-
+  state: string = 'active';
   constructor( public containerViewService: ContainerViewService, public showcaseService: ShowcaseService ) {
     this.fs = new Firestore();
     this.fb = this.fs.getConfiguredFirebase();

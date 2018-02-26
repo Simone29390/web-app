@@ -7,6 +7,7 @@ import {ShowcaseService} from "./showcase-service";
 import { Subscription } from 'rxjs/Rx';
 import {Firestore} from "../../firestore-cfg/firestore";
 import {ContainerViewService} from "../container-view/container-view.service";
+import {BOOM_OUT_ANIMATION} from "../../animations/boom-out.animation";
 
 @Pipe({
   name: 'searchFilter'
@@ -33,7 +34,8 @@ export class SearchFilter implements PipeTransform {
 @Component({
   selector: 'app-showcase',
   templateUrl: './showcase.component.html',
-  styleUrls: ['./showcase.component.css']
+  styleUrls: ['./showcase.component.css'],
+  animations: [ BOOM_OUT_ANIMATION ]
 })
 @Injectable()
 export class ShowcaseComponent implements OnInit, OnDestroy {
@@ -53,7 +55,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   isLogged: boolean;
   isValidated = true;
   @Input() mode: string;
-
+  state: string = 'active';
   constructor( public showcaseService: ShowcaseService,
                public containerViewService: ContainerViewService) {
 
