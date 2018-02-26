@@ -1,5 +1,5 @@
 <mat-tab-group
-  class="demo-tab-group"
+  class="demo-tab-group mat-elevation-z2 full-height"
   *ngIf="viewPage == 'donation'"
   [selectedIndex]="selectedTab"
   (selectedTabChange)="onLinkClick($event)">
@@ -41,13 +41,13 @@
 <app-showcase-favorite *ngIf="viewPage == 'favorite'"></app-showcase-favorite>
 
 <mat-tab-group
-  class="demo-tab-group"
+  class="demo-tab-group mat-elevation-z2 full-height"
   *ngIf="viewPage == 'home'"
   [selectedIndex]="selectedTab"
   (selectedTabChange)="onLinkClick($event)">
   <mat-tab label="Attive">
     <ng-template mat-tab-label>
-      <mat-icon>dashboard</mat-icon>
+      <mat-icon color="accent">dashboard</mat-icon>
       Attive ({{numbOfInsertion}})
     </ng-template>
     <div class="demo-tab-content">
@@ -56,7 +56,7 @@
   </mat-tab>
   <mat-tab label="In Scadenza">
     <ng-template mat-tab-label>
-      <mat-icon>new_releases</mat-icon>
+      <mat-icon color="accent">new_releases</mat-icon>
       In Scadenza ({{numbOfLastestInsertion}})
     </ng-template>
     <div class="demo-tab-content">
@@ -65,7 +65,7 @@
   </mat-tab>
   <mat-tab label="Ultimi Arrivi">
     <ng-template mat-tab-label>
-      <mat-icon>fiber_new</mat-icon>
+      <mat-icon color="accent">fiber_new</mat-icon>
       Ultimi Arrivi ({{numbOfNewestInsertion}})
     </ng-template>
     <div class="demo-tab-content">

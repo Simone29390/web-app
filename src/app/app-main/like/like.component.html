@@ -1,6 +1,6 @@
 <button *ngIf="!isMyFavorite && isLogged" mat-icon-button="" (click)="pushFavorite()">
   <i class="material-icons mat-dark">favorite_border</i>
 </button>
-<button *ngIf="isMyFavorite && isLogged" mat-icon-button="" (click)="pushFavorite()">
-  <i class="material-icons mat-dark">favorite</i>
+<button *ngIf="isMyFavorite && isLogged" mat-icon-button="" color="warn" (click)="pushFavorite()">
+  <i class="material-icons">favorite</i>
 </button>

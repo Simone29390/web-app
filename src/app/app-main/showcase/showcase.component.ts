@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs/Rx';
 import {Firestore} from "../../firestore-cfg/firestore";
 import {ContainerViewService} from "../container-view/container-view.service";
 import {BOOM_OUT_ANIMATION} from "../../animations/boom-out.animation";
+import {SidenavService} from "../side-menu/sidenave-service";
 
 @Pipe({
   name: 'searchFilter'
@@ -56,8 +57,10 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   isValidated = true;
   @Input() mode: string;
   state: string = 'active';
+  _sidenavState: Subscription;
+  sidenavState;
   constructor( public showcaseService: ShowcaseService,
-               public containerViewService: ContainerViewService) {
+               public containerViewService: ContainerViewService, private sidenav: SidenavService) {
 
     this.qm = new FirebaseQM();
     this.fs = new Firestore();
@@ -78,19 +81,26 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
 
     if (screenWidth <= 1024) {
       this.numCol = 2;
-      this.rowHeight = '270px';
+      this.rowHeight = '320px';
       this.mobile = true;
 
       if (screenWidth < 768) {
-        this.rowHeight = '190px';
+        this.rowHeight = '200px';
       }
 
     } else {
       this.numCol = 4;
-      this.rowHeight = '270px';
+      this.rowHeight = '320px';
       this.mobile = false;
     }
 
+  }
+
+  notifySidebar(flags) {
+    if (window.screen.width > 1024) {
+      if (flags)this.numCol = 3;
+      else this.numCol = 4;
+    }
   }
 
   ngOnInit() {
@@ -115,6 +125,11 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
 
       this.combineInsetions();
     });
+
+    this._sidenavState = this.sidenav.flags.subscribe((value) => {
+      console.log(value)
+      this.notifySidebar(value);
+    });
   }
 
   sendVerification() {
@@ -123,6 +138,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._subscription.unsubscribe();
+    this._sidenavState.unsubscribe();
   }
 
   public combineInsetions() {

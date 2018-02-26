@@ -7,7 +7,6 @@ mat-card {
   margin: 20px;
   vertical-align: top;
   cursor: pointer;
-  padding:0;
 }
 
 mat-card-subtitle, mat-card-content {

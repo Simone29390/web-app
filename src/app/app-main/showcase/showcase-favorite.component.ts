@@ -8,6 +8,7 @@ import {ShowcaseService} from "./showcase-service";
 import { Subscription } from 'rxjs/Rx';
 import {SearchFilter} from "./showcase.component";
 import {BOOM_OUT_ANIMATION} from "../../animations/boom-out.animation";
+import {SidenavService} from "../side-menu/sidenave-service";
 
 
 
@@ -35,7 +36,9 @@ export class ShowcaseFavoriteComponent implements OnInit, OnDestroy {
   isValidated = true;
   _subscription: Subscription;
   state: string = 'active';
-  constructor( public containerViewService: ContainerViewService, public showcaseService: ShowcaseService ) {
+  _sidenavState: Subscription;
+  sidenavState;
+  constructor( public containerViewService: ContainerViewService, public showcaseService: ShowcaseService, private sidenav: SidenavService ) {
     this.fs = new Firestore();
     this.fb = this.fs.getConfiguredFirebase();
     this.qm = new FirebaseQM();
@@ -52,16 +55,16 @@ export class ShowcaseFavoriteComponent implements OnInit, OnDestroy {
 
     if (screenWidth <= 1024) {
       this.numCol = 2;
-      this.rowHeight = '270px';
+      this.rowHeight = '320px';
       this.mobile = true;
 
       if (screenWidth < 768) {
-        this.rowHeight = '190px';
+        this.rowHeight = '200px';
       }
 
     } else {
       this.numCol = 4;
-      this.rowHeight = '270px';
+      this.rowHeight = '320px';
       this.mobile = false;
     }
 
@@ -75,6 +78,13 @@ export class ShowcaseFavoriteComponent implements OnInit, OnDestroy {
     console.log(this._subscription)
   }
 
+  notifySidebar(flags) {
+    if (window.screen.width > 1024) {
+      if (flags)this.numCol = 3;
+      else this.numCol = 4;
+    }
+  }
+
   ngOnInit() {
     let self = this;
 
@@ -85,7 +95,9 @@ export class ShowcaseFavoriteComponent implements OnInit, OnDestroy {
       }
     });
 
-
+    this._sidenavState = this.sidenav.flags.subscribe((value) => {
+      this.notifySidebar(value);
+    });
   }
 
 
@@ -116,8 +128,9 @@ export class ShowcaseFavoriteComponent implements OnInit, OnDestroy {
         groupRef.child(key).once('value').then(function ( snapshot1 ) {
 
           let cat =  snapshot1.child('category').val();
+          let state =  snapshot1.child('state').val();
 
-          if (disabled || checked[cat - 1]) {
+          if ((disabled || checked[cat - 1]) && (state === 'published')) {
             self.insertions.push({
               key: snapshot1.child('key').val(),
               datetime: snapshot1.child('datetime').val(),
@@ -147,5 +160,6 @@ export class ShowcaseFavoriteComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._subscription.unsubscribe();
+    this._sidenavState.unsubscribe();
   }
 }

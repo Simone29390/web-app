@@ -1,5 +1,5 @@
-<mat-sidenav-container class="side-menu">
-  <mat-sidenav #sidenav [mode]="mode" [(opened)]="opened" class="wrapper">
+<mat-sidenav-container class="side-menu ">
+  <mat-sidenav #sidenav [mode]="mode" [(opened)]="opened" class="wrapper mat-elevation-z2">
     <img src="/assets/wp/app_ace_image.png" class="logo">
     <app-profile-view></app-profile-view>
 
@@ -8,7 +8,9 @@
   <mat-sidenav-content *ngIf="!isMobile">
 
     <app-nav-bar></app-nav-bar>
-</mat-sidenav-content>
+
+
+  </mat-sidenav-content>
 
 
 </mat-sidenav-container>

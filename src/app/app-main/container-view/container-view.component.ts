@@ -3,6 +3,7 @@ import {Subscription} from "rxjs/Subscription";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatTabChangeEvent} from "@angular/material";
 import {ContainerViewService} from "./container-view.service";
+import {SidenavService} from "../side-menu/sidenave-service";
 
 @Component({
   selector: 'app-container-view',
@@ -28,6 +29,7 @@ export class ContainerViewComponent implements OnInit, OnDestroy {
   numbOfInsertion;
   numbOfNewestInsertion;
   numbOfLastestInsertion;
+
 
   constructor( private activatedRoute: ActivatedRoute, private router: Router, private containerViewService: ContainerViewService) { }
 
@@ -58,6 +60,8 @@ export class ContainerViewComponent implements OnInit, OnDestroy {
     this._lastestInsertion = this.containerViewService.numbOfLastestInsertion.subscribe((value) => {
       this.numbOfLastestInsertion = value;
     });
+
+
   }
 
   changeTab(id: any) {

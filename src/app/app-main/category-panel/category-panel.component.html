@@ -1,9 +1,9 @@
-<mat-sidenav-container class="side-menu" >
+<mat-sidenav-container class="side-menu">
   <mat-sidenav  #sidenav mode="side" [(opened)]="opened">
 
 
 
-    <mat-card >
+    <mat-card  [@boomState]="state">
 
       <h2>
         <i class="material-icons mat-dark">filter_list</i>
