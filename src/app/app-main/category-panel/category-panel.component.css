@@ -34,6 +34,9 @@ mat-sidenav-container, mat-sidenav {
 .mat-sidenav-container {
   width: 100%;
   padding: 0;
-
 }
 
+.mat-sidenav {
+  background-color: #EEEEEE;
+
+}

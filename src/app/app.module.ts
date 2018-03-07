@@ -56,6 +56,7 @@ import { ContainerViewComponent } from './app-main/container-view/container-view
 import { InformationAccountRequiredComponent } from './app-main/information-account-required/information-account-required.component';
 import { EditProfileComponent } from './app-main/edit-profile/edit-profile.component';
 import {ContainerViewService} from "./app-main/container-view/container-view.service";
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -86,7 +87,8 @@ import {ContainerViewService} from "./app-main/container-view/container-view.ser
     NavBarComponent,
     ContainerViewComponent,
     InformationAccountRequiredComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    FooterComponent
   ],
   imports: [
     RoutingModule,

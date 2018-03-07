@@ -1,4 +1,4 @@
-<mat-toolbar color="warn" class="toolbar mat-elevation-z4">
+<mat-toolbar color="primary" class="toolbar mat-elevation-z4">
 
   <button class="cube-menu" (click)="toggleSidenav()" mat-fab>
     <mat-icon>menu</mat-icon>
@@ -10,14 +10,14 @@
   <span class="spacer"></span>
 
   <span *ngIf="false">
-    <button mat-raised-button color="warn" (click)="openDialog()">
+    <button mat-raised-button color="primary" (click)="openDialog()">
       <mat-icon aria-label="Log In">account_circle</mat-icon>
       <small>Log In</small>
     </button>
   </span>
 
   <span *ngIf="logged">
-    <button mat-raised-button color="warn" (click)="logOut()">
+    <button mat-raised-button color="primary" (click)="logOut()">
       <mat-icon aria-label="Log Out" class="user-photo" [style.backgroundImage]="'url(' + getUserPhoto() + ')'"></mat-icon>
       <small>Esci</small>
     </button>

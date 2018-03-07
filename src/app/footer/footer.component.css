@@ -1,0 +1,24 @@
+.footer-list {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+@media only screen and (max-width: 767px) {
+  .footer-list {
+    position: relative;
+    width: auto;
+  }
+}
+
+.item.lang .lang-label {
+  padding: 0!important;
+}
+
+.footer-list .item h3{
+  display: block;
+}
+
+.footer-list .item.lang {
+  display: inline-flex;
+}

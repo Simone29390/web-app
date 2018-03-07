@@ -15,6 +15,8 @@ import {FALL_DOWN_ANIMATION} from "../../animations/fall-down.animation";
 })
 export class ItemComponent implements OnInit {
   @Input() insertion: object;
+  @Input() showBid = false;
+  @Input() showRedBid = false;
   insertionId: string;
   imagesArray = [];
   primaryImage = '/assets/other/blank.jpg';

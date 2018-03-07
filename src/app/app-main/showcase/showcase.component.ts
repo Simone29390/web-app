@@ -50,6 +50,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   numCol;
   rowHeight;
   mobile;
+  showBid = false;
   private fs: Firestore;
   private fb: firebase.app.App;
   private user: firebase.User;
@@ -190,6 +191,8 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
             timemillis    : snapshot.child('timemillis').val(),
             timeStart     : snapshot.child('timeStart').val(),
             timeToEnd     : snapshot.child('timeToEnd').val(),
+            auctionHigherBid: snapshot.child('auctionHigherBid').val(),
+            auctionHigherBidder: snapshot.child('auctionHigherBid').val(),
             image1        : snapshot.child('images').child('image1').val(),
             image3        : snapshot.child('images').child('image2').val(),
             image4        : snapshot.child('images').child('image3').val(),
@@ -235,4 +238,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     this.completed = false;
   }
 
+  isRedBid(auctionHigherBidder): boolean {
+    return false;
+  }
 }

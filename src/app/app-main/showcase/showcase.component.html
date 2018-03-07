@@ -25,7 +25,7 @@
 
   <mat-grid-tile *ngFor="let insertion of (insertions | searchFilter: search.value)">
 
-    <app-item [insertion]="insertion"></app-item>
+    <app-item [insertion]="insertion" [showBid]="showBid" [showRedBid]="isRedBid(insertion.auctionHigherBidder)"></app-item>
   </mat-grid-tile>
 
 

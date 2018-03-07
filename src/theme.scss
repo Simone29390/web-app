@@ -46,3 +46,18 @@ $alt-theme: mat-dark-theme($alt-primary, $alt-accent);
   @include mat-button-theme($alt-theme);
   @include mat-checkbox-theme($alt-theme);
 }
+
+
+// DEFAULT THEME
+
+$def-primary: mat-palette($mat-indigo, 900);
+$def-accent:  mat-palette($mat-indigo, 500);
+$def-warn:    mat-palette($mat-red,700);
+$def-theme: mat-light-theme($def-primary, $def-accent, $def-warn);
+
+.default {
+  @include angular-material-theme($def-theme);
+  @include mat-core-theme($def-theme);
+  @include mat-button-theme($def-theme);
+  @include mat-checkbox-theme($def-theme);
+}

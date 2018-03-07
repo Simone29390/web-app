@@ -32,6 +32,7 @@ export class ShowcaseFavoriteComponent implements OnInit, OnDestroy {
   haNoItems;
   numCol;
   rowHeight;
+  showBid = false;
   mobile;
   isValidated = true;
   _subscription: Subscription;
@@ -137,6 +138,8 @@ export class ShowcaseFavoriteComponent implements OnInit, OnDestroy {
               category: snapshot1.child('category').val(),
               title: snapshot1.child('title').val(),
               description: snapshot1.child('description').val(),
+              auctionHigherBid: snapshot1.child('auctionHigherBid').val(),
+              auctionHigherBidder: snapshot1.child('auctionHigherBid').val(),
               image1: snapshot1.child('images').child('image1').val(),
               image3: snapshot1.child('images').child('image2').val(),
               image4: snapshot1.child('images').child('image3').val(),
@@ -161,5 +164,9 @@ export class ShowcaseFavoriteComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this._subscription.unsubscribe();
     this._sidenavState.unsubscribe();
+  }
+
+  isRedBid(auctionHigherBidder): boolean {
+    return false;
   }
 }

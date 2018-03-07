@@ -9,7 +9,7 @@
 
     <div class="image-alone" *ngIf="imagesArray.length == 0">
 
-    <img mat-card-image [src]="primaryImage" class="mat-elevation-z1" *ngIf="imagesArray.length == 0">
+      <img mat-card-image [src]="primaryImage" class="mat-elevation-z1" *ngIf="imagesArray.length == 0">
     </div>
     <div class="image-content" *ngIf="imagesArray.length > 0">
 
@@ -25,14 +25,21 @@
         </section>
       </div>
     </div>
-      <mat-card-content *ngIf="!isMobile">
-    <h5 class="category">{{ getCategoryName(insertion['category']) }}
+    <mat-card-content *ngIf="!isMobile && !showBid">
+      <h5 class="category">{{ getCategoryName(insertion['category']) }}
 
-    </h5>
+      </h5>
 
-  </mat-card-content>
+    </mat-card-content>
   </a>
 
-  <app-like class="favorite" *ngIf="!isMobile"[key]="insertionId"></app-like>
+  <div *ngIf="showBid">
+    <span *ngIf="!showRedBid" style="color:darkgreen"> {{insertion['auctionHigherBid']}}</span>
+    <span *ngIf="showRedBid" style="color: #bf360c"> Donazione superata!</span>
+  </div>
+
+  <div *ngIf="!showBid">
+    <app-like class="favorite" *ngIf="!isMobile" [key]="insertionId"></app-like>
+  </div>
 
 </mat-card>
